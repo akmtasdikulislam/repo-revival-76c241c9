@@ -2,14 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/layout/SiteLayout";
-import { GALLERY_IMAGES, type GalleryImage } from "@/data/gallery";
+import { GALLERY_IMAGES_FULL, type GalleryImage } from "@/data/gallery";
 import { buildMeta } from "@/lib/seo";
 
 
 // Repeat the curated images to build a rich media wall.
 const IMAGES: GalleryImage[] = Array.from({ length: 3 })
   .flatMap((_, r) =>
-    GALLERY_IMAGES.map((g, i) => ({
+    GALLERY_IMAGES_FULL.map((g, i) => ({
       ...g,
       id: `${g.id}-${r}-${i}`,
     })),
