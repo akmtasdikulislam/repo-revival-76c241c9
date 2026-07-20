@@ -1,32 +1,48 @@
-## Status check
+## Verified current state of `src/styles/carnival.css`
 
-Phase 1 JSX work is already complete:
-- `SiteLayout.tsx` renders nav, footer, and the noise/scanline overlays with Tailwind utilities + `@theme` tokens (no legacy classnames like `nav-glass`, `.noise`, `.scanlines`, `.footer-*`).
-- `Reveal.tsx` is a plain framer-motion wrapper with no CSS dependency.
+I audited every class and CSS variable in `carnival.css` against the JSX and against `src/styles.css`. **Deleting it today would break the site.** Two concrete blockers, everything else is dead code:
 
-What's missing is the second half of every phase in the plan: **removing the matching CSS from `src/styles/carnival.css`**. Those rules are dead code today (nothing in JSX references them) but still ship.
+**Blocker A — 13 classes still referenced in JSX are defined only in `carnival.css`:**
+`reg-card` (used 22×), `reg-success`, `coach-block`, `coach-grid`, `member-row`, `members-block`, `members-label`, `institution-autocomplete`, `institution-option`, `institution-suggestions`, `phone-input`, `phone-prefix`, `copy-btn`.
+Consumers: `src/components/carnival/RegistrationForm.tsx` (shared by `IupcRegistration`, `CtfRegistration`, `HackathonRegistration`, `IdCardUploader`) and `src/routes/faq.tsx`.
 
-## Goal
+**Blocker B — 22 CSS custom properties defined in `carnival.css`'s `:root` are read by rules already migrated into `styles.css`:**
+`--primary`, `--primary-dark`, `--primary-light`, `--primary-mid`, `--primary-pale`, `--bg`, `--bg-2`, `--surface`, `--surface-2`, `--accent-bg`, `--text`, `--muted`, `--muted2`, `--border`, `--border-strong`, `--gold`, `--gold-dim`, `--cyan`, `--mint`, `--coral`, `--glow-gold`, `--fm`, `--fd`.
+Removing `carnival.css` first would silently break colors/fonts/borders across every already-migrated section (hero, tracks, timeline, sponsors, event hero, CountdownBar, FAQ, gallery, CTA).
 
-Delete the shared-chrome CSS from `src/styles/carnival.css` so Phase 1 is genuinely closed, without any visual change.
+Everything else in `carnival.css` (261 selectors defined, only 17 referenced from JSX) is dead. `carnival-wizard.css` is already gone from Phase 7.
 
-## Blocks to remove from `src/styles/carnival.css`
+## Phase 9 — safely retire `carnival.css` (aligned with the master plan)
 
-1. **Global base / reset** (~lines 1–98): `:root` token dump, `*`, `html`, `::selection`, `body`, `a`, `ul`, `em`, and the `::-webkit-scrollbar*` rules. Tokens already live in `src/styles.css` under `@theme`; the reset is covered by Tailwind Preflight + the small `@layer base` in `styles.css`.
-2. **Ambient overlays** (~lines 100–138): `.noise`, `.scanlines`, `#bgCanvas`, and the `body::before` radial-gradient backdrop. The two overlays are re-implemented inline in `SiteLayout.tsx`; `#bgCanvas` and the body backdrop are unused (no JSX renders them).
-3. **Nav chrome** (~lines 350–430): `.nav-logo`, `.nav-logo .dot`, `.nav-links`, `.nav-links a`, `.nav-links a:hover`, `.nav-links a.active`, `.nav-cta`, `.nav-cta:hover`, `.nav-burger`, `.nav-burger span`, plus any `#nav` / `.nav-glass` selectors in the same neighborhood.
-4. **Footer chrome** (~lines 1107–1180): `footer`, `.footer-top`, `.footer-logo`, `.footer-org`, `.footer-links`, `.footer-links a`, `.footer-links a:hover`, `.footer-bottom`, `.footer-tag`. Leave the sponsor-footer block (`#site-footer`, `.footer-sponsors*`, ~lines 4206–4420) alone — that belongs to Phase 4 (Sponsors).
-5. Any media-query fragments inside the Phase-1 line ranges above that only target the removed selectors.
+Order matters: migrate first, delete last, verify at each step. No JSX/design changes.
 
-Do **not** touch: base typography of section headers, `.section`, `.sec-hdr`, `.sec-num`, tracks, timeline, gallery, CTA, sponsors, wizard — those are future phases.
+### Step 1 — Promote legacy `:root` vars into the token system
+In `src/styles.css`, extend `@theme inline` with the 22 tokens above, sourcing them from the shadcn-style `:root` block. Where a token maps to an existing `cn-*` token (e.g. `--bg` == `--color-cn-bg`), alias it; where it doesn't, keep the original hex. Result: `styles.css` becomes self-sufficient for tokens and every migrated rule keeps working.
 
-## Verification (required before closing Phase 1)
+### Step 2 — Migrate the Registration + reg-card CSS block
+Extract the ~800 lines covering the 13 classes above and their descendants/media queries from `carnival.css` into `styles.css`, under a clearly-labeled section. Keep class names identical so JSX is untouched. This is a contiguous block — same approach used for sponsors/wizard in earlier phases.
 
-1. `rg -n "\.noise|\.scanlines|#bgCanvas|nav-logo|nav-links|nav-cta|nav-burger|footer-top|footer-logo|footer-links|footer-bottom|footer-tag" src/styles/carnival.css` → no matches.
-2. `rg -n "nav-logo|nav-links|nav-cta|nav-burger|footer-top|footer-logo|footer-links|footer-bottom|footer-tag|\\bnoise\\b|scanlines|bgCanvas" src -g '!*.css'` → no JSX references (expected: empty).
-3. Load `/` in the preview at 1280 wide via Playwright, screenshot the top (nav + hero overlays) and the bottom (footer). Compare against a screenshot captured before the deletion — pixel diff should be visually identical.
-4. Line count: `src/styles/carnival.css` should drop from 8654 to roughly 8400–8450.
+Optional micro-cleanup during the move: if any of those rules only reference `cn-*` tokens after Step 1, prefer `@utility` + Tailwind idioms; otherwise keep as plain class rules. No selector renames.
 
-## Then
+### Step 3 — Prove `carnival.css` is unreachable
+Re-run the two diff scripts:
+- `comm -12 <carnival selectors> <jsx classes>` → must be empty.
+- `comm -12 <carnival vars> <vars used elsewhere>` → must be empty.
+- Also `rg` `carnival.css` in the project — only the single `@import` should remain.
 
-Once verified, proceed strictly to **Phase 2 — Home hero + Countdown** (hero grid, terminal card, CTA buttons, meta stats, `Countdown` flip-clock overrides) as the next planning turn.
+### Step 4 — Remove the import and delete the file
+- Delete the `@import "./styles/carnival.css"` line in `src/styles.css` (must remain in the top `@import` block per Lightning CSS).
+- `rm src/styles/carnival.css`; remove the empty `src/styles/` directory.
+
+### Step 5 — Visual + runtime verification
+- Playwright screenshots at 1280×1800 for `/`, `/iupc`, `/ctf`, `/hackathon`, `/faq`, `/gallery`, compared against pre-deletion captures.
+- Walk the IUPC registration wizard through Personal Info → Members → Coach → Payment → Success to confirm `reg-card`, `member-row`, `phone-input`, `institution-autocomplete`, and `reg-success` still render pixel-identical.
+- Console + network: no 404s, no Tailwind "unknown utility" warnings, no missing-var fallbacks.
+
+### Rollback
+Steps 1–3 are additive; if Step 5 catches any regression, restore `carnival.css` from git and re-open only the offending block. No JSX churn to undo.
+
+## End state after Phase 9
+- `src/styles/carnival.css` and `src/styles/carnival-wizard.css` both gone.
+- `src/styles.css` is the single stylesheet: `@import "tailwindcss"` + `@theme` tokens + small `@layer base` reset + the handful of `@utility`/component classes that repeat (buttons, wizard, registration, section headers, marquee/glitch keyframes).
+- Tailwind v4 utilities in JSX everywhere else. UI pixel-identical.
