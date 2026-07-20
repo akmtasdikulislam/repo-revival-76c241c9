@@ -52,7 +52,7 @@ export const initSslczSession = createServerFn({ method: "POST" })
       cancel_url: `${base}/api/public/sslcz/cancel`,
       ipn_url: `${base}/api/public/sslcz/ipn`,
       shipping_method: "NO",
-      product_name: "BUP CSE Tech Carnival 2.0 — IUPC Registration",
+      product_name: "BUP CSE Tech Carnival 2.0",
       product_category: "EventRegistration",
       product_profile: "non-physical-goods",
       cus_name: data.teamName || "IUPC Team",
