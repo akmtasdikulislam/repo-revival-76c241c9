@@ -519,7 +519,7 @@ export function Wizard({ cfg }: { cfg: EventConfig }) {
             </div>
           )}
           {payError && (
-            <p style={{ color: "var(--coral)", fontSize: 13, marginTop: 12 }}>
+            <p style={{ color: "var(--color-cn-coral)", fontSize: 13, marginTop: 12 }}>
               Payment error: {payError}
             </p>
           )}

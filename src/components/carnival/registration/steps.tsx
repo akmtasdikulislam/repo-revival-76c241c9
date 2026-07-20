@@ -777,7 +777,7 @@ export function StepPayment({
           <dt>Method</dt>
           <dd style={{ textTransform: "capitalize" }}>{payMethod}</dd>
           <dt>Total due</dt>
-          <dd style={{ color: "var(--gold)", fontWeight: 700 }}>৳{fee}</dd>
+          <dd style={{ color: "var(--color-cn-gold)", fontWeight: 700 }}>৳{fee}</dd>
         </dl>
       </div>
 
