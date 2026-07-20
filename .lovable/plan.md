@@ -1,84 +1,115 @@
-# Codebase Optimization Plan (UI stays pixel-identical)
+# Phase A — Registration Engine
 
-Goal: shrink the codebase and enforce DRY without touching the rendered design. Measured on the current tree (`~8.9k LOC` in app source + `~2.7k LOC` styles). Realistic target: **~40–50% reduction in hand-written LOC**, one source of truth per concern.
+Consolidate `IupcRegistration.tsx` (1,251) + `CtfRegistration.tsx` (1,422) + `HackathonRegistration.tsx` (1,601) = **4,274 LOC** into one schema-driven wizard + three tiny config files (~800 LOC total). Zero visual/behavioral change.
 
-## Where the duplication actually lives (verified)
+## Confirmed differences between the three (drives the config shape)
 
-| Area | Files | Lines | Duplication |
+| Concern | IUPC | CTF | Hackathon |
 |---|---|---|---|
-| Registration wizards | `IupcRegistration.tsx`, `CtfRegistration.tsx`, `HackathonRegistration.tsx` | 1251 + 1422 + 1601 = **4274** | Same stepper, same field renderers, same review/payment/success screens; only schema + step order differ |
-| Event pages | `routes/iupc.tsx`, `ctf.tsx`, `hackathon.tsx` | 85 + 93 + 90 | Identical `event-hero` + `event-meta` + section scaffolding, only copy differs |
-| Route `head()` meta | every `routes/*.tsx` + `__root.tsx` | ~15 lines/route | Same og/twitter boilerplate copy-pasted |
-| `styles.css` | 2657 lines, 385 class rules | Many hex/px repeats already declared as `--cn-*` tokens; buttons/section headers/eyebrow patterns repeat under aliases |
+| Team size | Fixed **3** | Chooser: **1–4** (solo flow vs team flow) | Chooser: **1–4** (solo vs team flow) |
+| Coach | Yes (required step) | No | No |
+| Project step | No | No | Yes (title/pitch/problem/stack) |
+| Solo prefix step | No | `StepSolo` | `StepSolo` |
+| Step flow | `team → members → coach → review → payment` | solo: `solo → review → payment` / team: `team → members → review → payment` | solo: `solo → project → review → payment` / team: `team → members → project → review → payment` |
+| Fee | 500 × 3 = 1500 BDT | 500 × N | 500 × N |
+| Roles list | — | — | `ROLE_OPTIONS` on members |
 
-`RegistrationForm.tsx` (215 lines) already exists but the three event wizards don't use it — they each re-implement the same primitives.
+Everything else — `StepBar`, `FeeBanner`, `Field`, `PhoneInput`, `PhotoUploader`, `StepTeam`, `StepMembers`, `StepReview`, `StepPayment`, `SuccessPanel`, `SummaryAside`, `SizeChart`, `TSHIRT_SIZES`, `YEAR_OPTIONS`, `emailRe`, `digits`, institution autocomplete, agree checkboxes, SSLCommerz init, payError handling, motion variants — is duplicated across all three.
 
-## Plan (phased, each phase ships independently, visual diff after every phase)
+## Target file layout
 
-### Phase A — Registration engine (biggest win, ~2,500 LOC removed)
+```text
+src/components/carnival/registration/
+  WizardShell.tsx        # top-level: state, flow control, step dispatch, payment, success
+  types.ts               # EventConfig, StepId, Member, Coach, Project, FlowResolver
+  fields.tsx             # Field, PhoneInput, PhotoUploader, InstitutionAutocomplete
+  steps/
+    StepTeam.tsx         # team name + institution + leader (shared)
+    StepSolo.tsx         # solo variant of leader form (CTF/Hackathon)
+    StepMembers.tsx      # dynamic members list; role column shown iff config.showMemberRole
+    StepCoach.tsx        # coach form (IUPC only, gated by config.coach)
+    StepProject.tsx      # project form (Hackathon only, gated by config.project)
+    StepReview.tsx       # renders sections driven by config.reviewSections
+    StepPayment.tsx      # agree checkboxes + payMethod + SSLCommerz init
+  parts/
+    StepBar.tsx
+    FeeBanner.tsx
+    SummaryAside.tsx
+    SizeChart.tsx
+    TeamSizeChooser.tsx  # CTF/Hackathon prefix
+    SuccessPanel.tsx
+  events/
+    iupc.config.ts
+    ctf.config.ts
+    hackathon.config.ts
+```
 
-Introduce a single **schema-driven** wizard and delete the three copies.
+All existing `wiz-*` / `phone-input` / `institution-autocomplete` CSS classes stay — the JSX class names don't change.
 
-- New: `src/components/carnival/registration/`
-  - `WizardShell.tsx` — stepper, progress, prev/next, review, payment, success (extracted verbatim from IUPC, which is the most complete)
-  - `fields.tsx` — `TextField`, `PhoneField`, `InstitutionField`, `PhotoField` (thin wrappers over existing classes `wiz-field`, `phone-input`, `institution-autocomplete`, reusing `IdCardUploader`)
-  - `types.ts` — `EventConfig`, `StepDef`, `MemberSchema`, `CoachSchema`
-  - `events/iupc.config.ts`, `events/ctf.config.ts`, `events/hackathon.config.ts` — pure data: fee, team size rules, steps, member/coach field lists, review layout
-- The three route files import `<Wizard config={iupcConfig} />` instead of a bespoke component.
-- Delete `IupcRegistration.tsx`, `CtfRegistration.tsx`, `HackathonRegistration.tsx`.
-- Keep the existing `wiz-*` CSS classes (they're already the design system for the wizard).
+## `EventConfig` shape (types.ts)
 
-Acceptance: walk each event's Personal → Members → Coach/Review → Payment → Success; DOM class names and rendered markup match a captured baseline.
+```ts
+type EventKey = "iupc" | "ctf" | "hackathon";
 
-### Phase B — Event page shell (~150 LOC removed, prevents future drift)
+type EventConfig = {
+  key: EventKey;
+  displayName: string;         // "IUPC" | "CTF" | "Hackathon"
+  feePerPerson: number;        // 500
 
-- New: `src/components/carnival/EventPage.tsx` accepting `{ hero: {bg, fg, tag, title, sub, desc, meta[], reporting}, children }`.
-- `routes/iupc.tsx`, `ctf.tsx`, `hackathon.tsx` become thin: hero config object + page-specific sections as children.
-- No CSS changes; same `event-hero`, `event-meta`, `em-num` classes.
+  team:
+    | { kind: "fixed"; size: number }          // IUPC: 3
+    | { kind: "chooser"; min: 1; max: 4 };     // CTF/Hackathon
 
-### Phase C — Route metadata helper (~80 LOC removed, guarantees SEO consistency)
+  coach?: { required: true };                  // IUPC only
+  project?: { fields: ProjectFieldDef[] };     // Hackathon only
+  showMemberRole?: boolean;                    // Hackathon only
 
-- New: `src/lib/seo.ts` exporting `buildMeta({ title, description, ogImage? })` returning the full meta array (title + description + og:* + twitter:*).
-- Fix a real bug at the same time: `__root.tsx` currently ships the template defaults `"Lovable App"` / `"Lovable Generated Project"` — replace with real carnival defaults per the head-metadata rule.
-- Every route's `head()` becomes `meta: buildMeta({...})`.
+  // Flow resolver — pure function so both solo/team branches live in config:
+  resolveFlow: (ctx: { teamSize: number }) => StepId[];
 
-### Phase D — `styles.css` consolidation (~600–800 LOC removed, no visual change)
+  copy: {
+    teamStepTitle: string;
+    membersHint: string;
+    successHeadline: string;
+    // etc. — only strings that actually differ between events
+  };
+};
+```
 
-Not a full rewrite — targeted DRY passes only:
+Configs (~60 LOC each) hold ONLY the differences above. Everything else lives in `WizardShell`/steps.
 
-1. **Kill legacy `:root` aliases.** `--gold`, `--cyan`, `--bg`, `--text`, `--muted`, `--border`, `--fm`, `--fd` etc. duplicate `--color-cn-*` and `--font-*` tokens introduced in Phase 0. `sed`-replace usages to the canonical token, then delete the alias block. Single source of truth for design tokens.
-2. **Promote genuinely reused patterns to `@utility`** (v4-correct): `sec-num`, `sec-title`, `sec-sub`, `eyebrow`, `em-num`, `em-label`, `tc-status`. These are used across ≥3 routes → utilities beat class rules. Leaf one-offs stay as classes.
-3. **Merge button variants.** `.btn-primary`, `.btn-ghost`, `.wiz-btn.primary`, `.wiz-btn.ghost`, `.wiz-photo-btn` share ~90% of declarations. Consolidate into one `@utility btn` + size/variant modifiers; keep old class names as thin aliases (`.btn-primary { @apply btn btn-gold; }`) so JSX doesn't change.
-4. **Delete dead rules.** Cross-check every remaining selector against `rg -F` in `src/`; drop unreferenced ones (audit from Phase 9 already flagged several).
-5. **Collapse repeated `@media (max-width: …)` blocks** by co-locating with their base rule (v4 supports nesting).
+## Migration steps (single turn, verified at the end)
 
-Explicitly **not** doing: rewriting `styles.css` into pure Tailwind utilities in JSX. The `@utility`/component-class layer is the right industry pattern for a design system this specific (glitch effects, marquee, wizard chrome). We keep one stylesheet, tighter.
+1. Create `types.ts`, `fields.tsx`, and every file under `steps/`, `parts/`, `events/` by lifting the existing IUPC implementations (most complete) verbatim, then generalizing only where the table above shows divergence.
+2. Create `WizardShell.tsx`:
+   - Holds `teamSize`, `step`, `touched`, `teamName`, `institution`, `leader*`, `members`, `coach`, `project`, `agree*`, `payMethod`, `submitting`, `done`, `payError`, `code`.
+   - Derives `flow = config.resolveFlow({ teamSize })`.
+   - Renders `<StepBar />`, `<FeeBanner />`, active step, `<SummaryAside />`.
+   - Owns the SSLCommerz `initSslczSession` call and success screen (IUPC's version is the canonical one).
+3. Write the three config files (`iupc.config.ts`, `ctf.config.ts`, `hackathon.config.ts`).
+4. Update routes to swap the component imports:
+   - `iupc.tsx` → `<Wizard config={iupcConfig} />` (replace `<IupcRegistration />`).
+   - `ctf.tsx` → `<Wizard config={ctfConfig} />`.
+   - `hackathon.tsx` → `<Wizard config={hackathonConfig} />`.
+   - Export `Wizard` as the default from `WizardShell.tsx`.
+5. `rm src/components/carnival/{Iupc,Ctf,Hackathon}Registration.tsx`.
+6. Verification (still Phase A, before we move on):
+   - `bunx tsgo --noEmit` clean.
+   - `bun run build` clean, no unknown-utility warnings.
+   - Playwright 1280×1800 walkthrough of each event: pick team size (CTF/Hack), fill team → members → coach/project → review → payment, trigger validation errors on each step, verify success screen. Screenshot each step and eyeball against the current build.
+   - `rg -F "IupcRegistration|CtfRegistration|HackathonRegistration"` returns zero matches in `src/`.
 
-### Phase E — Small component hygiene (~200 LOC removed)
+## What stays untouched
 
-- `SiteLayout.tsx`: extract `NAV_ITEMS` map render into a `<NavLinks variant="header|footer" />` (used twice today, verbatim).
-- `IdCardUploader.tsx`: move the huge `getCroppedImg` + `loadImage` helpers into `src/lib/image-crop.ts`.
-- `ContactForm.tsx`: reuse the same `TextField` primitive introduced in Phase A.
+- All `wiz-*`, `phone-input`, `institution-autocomplete`, `reg-card` CSS.
+- Fee math, validation rules, SSLCommerz flow, success code generation.
+- Route paths, SEO metadata, hero sections, `EventPage` shell.
+- `IdCardUploader` (already presentation-only after Phase E.2).
 
-### Phase F — Verification gate (run after each phase)
+## Risks & mitigation
 
-- `bun run build` clean, no unknown-utility warnings.
-- Playwright screenshots (1280×1800) of `/`, `/iupc`, `/ctf`, `/hackathon`, `/gallery`, `/faq` diffed against a baseline captured before Phase A.
-- Full IUPC + CTF + Hackathon registration walk-through, including validation error states and success screen.
-- `rg` sweep confirms no orphaned class names or CSS vars.
+- **Behavioral drift on payment/success** — I'll port IUPC's payment/success verbatim (it's the most complete) and hand-test the CTF/Hack redirects.
+- **Divergent copy silently unified** — every user-visible string that differs stays in `config.copy`; no invented text.
+- **Validation regressions** — validators live next to their step; touched-key names preserved so error styling matches.
 
-## What I will NOT change
-- Public routes, URLs, SEO slugs.
-- Any rendered text, color, spacing, animation timing.
-- The Tailwind v4 setup (`@theme` tokens, single stylesheet) — it's already correct.
-- Registration form fields, validation rules, fees, payment flow.
-
-## Expected end state
-- `src/components/carnival/*Registration.tsx` (4274 LOC) → one `WizardShell` + 3 tiny config files (~800 LOC total).
-- Three event routes ~90 LOC each → ~25 LOC each.
-- `styles.css` 2657 → ~1900 LOC, no duplicate tokens, buttons/section headers unified.
-- One `buildMeta` helper, real app title/description at the root.
-- Hand-written LOC down ~40–50%, zero visual diff.
-
-## Order of execution
-Phase D.1 (token dedupe) → A → B → C → D.2–5 → E → F. D.1 first because it de-risks A/B (they'll reference canonical tokens from day one).
+Approve to implement in the next turn.
