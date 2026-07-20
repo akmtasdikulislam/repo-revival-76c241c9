@@ -2,7 +2,6 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./styles/carnival.css" layer(base);
-@import "./styles/carnival-wizard.css" layer(base);
 
 
 /* ============================================================
