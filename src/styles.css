@@ -370,7 +370,8 @@
   text-transform: uppercase;
 }
 .contact-field > span { opacity: .78; }
-.contact-field input {
+.contact-field input,
+.contact-field textarea {
   padding: 12px 14px;
   border: 1px solid rgba(146, 178, 255, .22);
   border-radius: 12px;
@@ -382,12 +383,19 @@
   text-transform: none;
   transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.contact-field input:focus {
+.contact-field textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+.contact-field input:focus,
+.contact-field textarea:focus {
   outline: none;
   border-color: var(--cyan, #35d0e0);
   background: rgba(4, 12, 32, .85);
   box-shadow: 0 0 0 3px rgba(53, 208, 224, .18);
 }
+
 .contact-err {
   color: #ff8896;
   font-size: 10px;
