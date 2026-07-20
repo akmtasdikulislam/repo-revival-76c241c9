@@ -9,38 +9,194 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IupcRouteImport } from './routes/iupc'
+import { Route as HackathonRouteImport } from './routes/hackathon'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as CtfRouteImport } from './routes/ctf'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicSslczSuccessRouteImport } from './routes/api/public/sslcz.success'
+import { Route as ApiPublicSslczIpnRouteImport } from './routes/api/public/sslcz.ipn'
+import { Route as ApiPublicSslczFailRouteImport } from './routes/api/public/sslcz.fail'
+import { Route as ApiPublicSslczCancelRouteImport } from './routes/api/public/sslcz.cancel'
 
+const IupcRoute = IupcRouteImport.update({
+  id: '/iupc',
+  path: '/iupc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HackathonRoute = HackathonRouteImport.update({
+  id: '/hackathon',
+  path: '/hackathon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CtfRoute = CtfRouteImport.update({
+  id: '/ctf',
+  path: '/ctf',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSslczSuccessRoute = ApiPublicSslczSuccessRouteImport.update({
+  id: '/api/public/sslcz/success',
+  path: '/api/public/sslcz/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSslczIpnRoute = ApiPublicSslczIpnRouteImport.update({
+  id: '/api/public/sslcz/ipn',
+  path: '/api/public/sslcz/ipn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSslczFailRoute = ApiPublicSslczFailRouteImport.update({
+  id: '/api/public/sslcz/fail',
+  path: '/api/public/sslcz/fail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSslczCancelRoute = ApiPublicSslczCancelRouteImport.update({
+  id: '/api/public/sslcz/cancel',
+  path: '/api/public/sslcz/cancel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ctf': typeof CtfRoute
+  '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
+  '/hackathon': typeof HackathonRoute
+  '/iupc': typeof IupcRoute
+  '/api/public/sslcz/cancel': typeof ApiPublicSslczCancelRoute
+  '/api/public/sslcz/fail': typeof ApiPublicSslczFailRoute
+  '/api/public/sslcz/ipn': typeof ApiPublicSslczIpnRoute
+  '/api/public/sslcz/success': typeof ApiPublicSslczSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ctf': typeof CtfRoute
+  '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
+  '/hackathon': typeof HackathonRoute
+  '/iupc': typeof IupcRoute
+  '/api/public/sslcz/cancel': typeof ApiPublicSslczCancelRoute
+  '/api/public/sslcz/fail': typeof ApiPublicSslczFailRoute
+  '/api/public/sslcz/ipn': typeof ApiPublicSslczIpnRoute
+  '/api/public/sslcz/success': typeof ApiPublicSslczSuccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ctf': typeof CtfRoute
+  '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
+  '/hackathon': typeof HackathonRoute
+  '/iupc': typeof IupcRoute
+  '/api/public/sslcz/cancel': typeof ApiPublicSslczCancelRoute
+  '/api/public/sslcz/fail': typeof ApiPublicSslczFailRoute
+  '/api/public/sslcz/ipn': typeof ApiPublicSslczIpnRoute
+  '/api/public/sslcz/success': typeof ApiPublicSslczSuccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ctf'
+    | '/faq'
+    | '/gallery'
+    | '/hackathon'
+    | '/iupc'
+    | '/api/public/sslcz/cancel'
+    | '/api/public/sslcz/fail'
+    | '/api/public/sslcz/ipn'
+    | '/api/public/sslcz/success'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ctf'
+    | '/faq'
+    | '/gallery'
+    | '/hackathon'
+    | '/iupc'
+    | '/api/public/sslcz/cancel'
+    | '/api/public/sslcz/fail'
+    | '/api/public/sslcz/ipn'
+    | '/api/public/sslcz/success'
+  id:
+    | '__root__'
+    | '/'
+    | '/ctf'
+    | '/faq'
+    | '/gallery'
+    | '/hackathon'
+    | '/iupc'
+    | '/api/public/sslcz/cancel'
+    | '/api/public/sslcz/fail'
+    | '/api/public/sslcz/ipn'
+    | '/api/public/sslcz/success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CtfRoute: typeof CtfRoute
+  FaqRoute: typeof FaqRoute
+  GalleryRoute: typeof GalleryRoute
+  HackathonRoute: typeof HackathonRoute
+  IupcRoute: typeof IupcRoute
+  ApiPublicSslczCancelRoute: typeof ApiPublicSslczCancelRoute
+  ApiPublicSslczFailRoute: typeof ApiPublicSslczFailRoute
+  ApiPublicSslczIpnRoute: typeof ApiPublicSslczIpnRoute
+  ApiPublicSslczSuccessRoute: typeof ApiPublicSslczSuccessRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/iupc': {
+      id: '/iupc'
+      path: '/iupc'
+      fullPath: '/iupc'
+      preLoaderRoute: typeof IupcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hackathon': {
+      id: '/hackathon'
+      path: '/hackathon'
+      fullPath: '/hackathon'
+      preLoaderRoute: typeof HackathonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ctf': {
+      id: '/ctf'
+      path: '/ctf'
+      fullPath: '/ctf'
+      preLoaderRoute: typeof CtfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +204,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/sslcz/success': {
+      id: '/api/public/sslcz/success'
+      path: '/api/public/sslcz/success'
+      fullPath: '/api/public/sslcz/success'
+      preLoaderRoute: typeof ApiPublicSslczSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sslcz/ipn': {
+      id: '/api/public/sslcz/ipn'
+      path: '/api/public/sslcz/ipn'
+      fullPath: '/api/public/sslcz/ipn'
+      preLoaderRoute: typeof ApiPublicSslczIpnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sslcz/fail': {
+      id: '/api/public/sslcz/fail'
+      path: '/api/public/sslcz/fail'
+      fullPath: '/api/public/sslcz/fail'
+      preLoaderRoute: typeof ApiPublicSslczFailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sslcz/cancel': {
+      id: '/api/public/sslcz/cancel'
+      path: '/api/public/sslcz/cancel'
+      fullPath: '/api/public/sslcz/cancel'
+      preLoaderRoute: typeof ApiPublicSslczCancelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CtfRoute: CtfRoute,
+  FaqRoute: FaqRoute,
+  GalleryRoute: GalleryRoute,
+  HackathonRoute: HackathonRoute,
+  IupcRoute: IupcRoute,
+  ApiPublicSslczCancelRoute: ApiPublicSslczCancelRoute,
+  ApiPublicSslczFailRoute: ApiPublicSslczFailRoute,
+  ApiPublicSslczIpnRoute: ApiPublicSslczIpnRoute,
+  ApiPublicSslczSuccessRoute: ApiPublicSslczSuccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

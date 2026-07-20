@@ -1,6 +1,63 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./styles/carnival.css" layer(base);
+@import "./styles/carnival-wizard.css" layer(base);
+
+
+/* ============================================================
+ * Carnival design tokens (Tailwind v4)
+ * These become utilities: bg-cn-bg, text-cn-ink, border-cn-strong,
+ * font-mono (JetBrains), font-display (Bebas), text-cn-gold, etc.
+ * ============================================================ */
+@theme {
+  /* Brand / navy */
+  --color-cn-primary: #092763;
+  --color-cn-primary-dark: #050f2e;
+  --color-cn-primary-mid: #123a8c;
+  --color-cn-primary-light: #3f6fe0;
+  --color-cn-primary-pale: #c9d6f7;
+
+  /* Surfaces */
+  --color-cn-bg: #050b1f;
+  --color-cn-bg-2: #081536;
+  --color-cn-surface: #0c1f4d;
+  --color-cn-surface-2: #0e2a63;
+  --color-cn-accent-bg: #0a1a42;
+
+  /* Ink */
+  --color-cn-ink: #eef2ff;
+  --color-cn-ink-dim: rgb(238 242 255 / 0.62);
+  --color-cn-ink-dimmer: rgb(238 242 255 / 0.38);
+
+  /* Borders */
+  --color-cn-strong: rgb(146 178 255 / 0.32);
+
+  /* Accents */
+  --color-cn-gold: #f2b705;
+  --color-cn-gold-dim: #c99303;
+  --color-cn-cyan: #35d0e0;
+  --color-cn-mint: #2fe6a6;
+  --color-cn-coral: #ff6f6f;
+  --color-cn-pink: #ff5fa8;
+
+  /* Type */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Bebas Neue", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+
+  /* Effects */
+  --shadow-glow-gold: 0 0 24px rgb(242 183 5 / 0.35);
+  --shadow-glow-cyan: 0 0 24px rgb(53 208 224 / 0.3);
+  --shadow-glow-primary: 0 0 40px rgb(63 111 224 / 0.28);
+  --shadow-nav-glass: 0 10px 40px -14px rgb(0 0 0 / 0.55);
+}
+
+/* Hero / terminal micro-animations (Phase 2 migration) */
+@keyframes cn-blink { 50% { opacity: 0; } }
+@utility cn-cursor { display: inline-block; animation: cn-blink 1s step-end infinite; }
+
+
 
 @custom-variant dark (&:is(.dark *));
 
