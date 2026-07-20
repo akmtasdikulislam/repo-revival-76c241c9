@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { IupcRegistration } from "@/components/carnival/IupcRegistration";
 import { EventPage } from "@/components/carnival/EventPage";
+import { Wizard } from "@/components/carnival/registration/WizardShell";
+import { iupcConfig } from "@/components/carnival/registration/events/iupc.config";
 import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/iupc")({
@@ -55,7 +56,7 @@ function IUPC() {
           </h2>
           <p className="sec-sub">All 3 members are required for IUPC.</p>
         </div>
-        <IupcRegistration />
+        <Wizard cfg={iupcConfig} />
       </section>
     </EventPage>
   );
