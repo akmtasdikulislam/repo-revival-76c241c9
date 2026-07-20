@@ -72,9 +72,9 @@ function FAQ() {
   return (
     <SiteLayout>
       <section className="section" style={{ paddingTop: 150 }}>
-        <div className="sec-hdr">
-          <span className="sec-num">// faq --list</span>
-          <h2 className="sec-title">Frequently asked</h2>
+        <div className="section-header">
+          <span className="section-eyebrow">// faq --list</span>
+          <h2 className="section-title">Frequently asked</h2>
         </div>
         <div className="faq-search">
           <input
@@ -109,16 +109,16 @@ function FAQ() {
       </section>
 
       <section className="section alt">
-        <div className="sec-hdr">
-          <span className="sec-num">// ask --question</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// ask --question</span>
+          <h2 className="section-title">
             Still stuck? <em>Ask us</em>
           </h2>
-          <p className="sec-sub">Your question goes straight to the organizing team.</p>
+          <p className="section-subtitle">Your question goes straight to the organizing team.</p>
         </div>
-        <div className="reg-card">
+        <div className="registration-card">
           {submitted && (
-            <div className="reg-success" style={{ display: "block" }}>
+            <div className="registration-success" style={{ display: "block" }}>
               ✓ Thanks! Your question has been submitted.
             </div>
           )}

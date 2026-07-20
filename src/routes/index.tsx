@@ -109,23 +109,23 @@ function Home() {
 
       {/* TRACKS / SEGMENT SHOWCASE */}
       <section className="section" id="tracks">
-        <div className="sec-hdr">
-          <span className="sec-num">// core_tracks[3]</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// core_tracks[3]</span>
+          <h2 className="section-title">
             Choose your <em>process</em>
           </h2>
-          <p className="sec-sub">Three independent competitions, each with its own registration.</p>
+          <p className="section-subtitle">Three independent competitions, each with its own registration.</p>
         </div>
 
         <Reveal>
           <div
             className="track-card"
-            style={{ ["--tc-bg" as any]: "#123a8c", ["--tc-fg" as any]: "#eef2ff" }}
+            style={{ ["--countdown-bg" as any]: "#123a8c", ["--countdown-fg" as any]: "#eef2ff" }}
           >
             <div className="track-info">
               <div className="track-tag">
-                <span className="tc-num">01</span>
-                <span className="tc-status">Registration Opens Soon</span>
+                <span className="countdown-number">01</span>
+                <span className="event-status">Registration Opens Soon</span>
               </div>
               <h3 className="track-title">IUPC</h3>
               <p className="track-desc">
@@ -147,12 +147,12 @@ function Home() {
         <Reveal delay={0.1}>
           <div
             className="track-card"
-            style={{ ["--tc-bg" as any]: "#f2b705", ["--tc-fg" as any]: "#092763" }}
+            style={{ ["--countdown-bg" as any]: "#f2b705", ["--countdown-fg" as any]: "#092763" }}
           >
             <div className="track-info">
               <div className="track-tag">
-                <span className="tc-num">02</span>
-                <span className="tc-status">Registration Opens Soon</span>
+                <span className="countdown-number">02</span>
+                <span className="event-status">Registration Opens Soon</span>
               </div>
               <h3 className="track-title">
                 CTF
@@ -178,12 +178,12 @@ function Home() {
         <Reveal delay={0.2}>
           <div
             className="track-card"
-            style={{ ["--tc-bg" as any]: "#073a46", ["--tc-fg" as any]: "#eef2ff" }}
+            style={{ ["--countdown-bg" as any]: "#073a46", ["--countdown-fg" as any]: "#eef2ff" }}
           >
             <div className="track-info">
               <div className="track-tag">
-                <span className="tc-num">03</span>
-                <span className="tc-status">Registration Opens Soon</span>
+                <span className="countdown-number">03</span>
+                <span className="event-status">Registration Opens Soon</span>
               </div>
               <h3 className="track-title">Hackathon</h3>
               <p className="track-desc">
@@ -205,12 +205,12 @@ function Home() {
 
       {/* EVENT TIMELINE */}
       <section className="section alt" id="timeline">
-        <div className="sec-hdr">
-          <span className="sec-num">// event.log</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// event.log</span>
+          <h2 className="section-title">
             Boot <em>sequence</em>
           </h2>
-          <p className="sec-sub">The road from registration to grand finale.</p>
+          <p className="section-subtitle">The road from registration to grand finale.</p>
         </div>
         <div className="log-list">
           {[
@@ -234,12 +234,12 @@ function Home() {
 
       {/* EARLIER EVENTS / LEGACY */}
       <section className="section" id="legacy">
-        <div className="sec-hdr">
-          <span className="sec-num">// history --all</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// history --all</span>
+          <h2 className="section-title">
             Building on the <em>first carnival</em>
           </h2>
-          <p className="sec-sub">
+          <p className="section-subtitle">
             Tech Carnival 2.0 grows out of BUP CSE's earlier programming and CTF events.
           </p>
         </div>
@@ -273,12 +273,12 @@ function Home() {
 
       {/* GALLERY TEASER */}
       <section className="section alt gallery-preview-section">
-        <div className="sec-hdr">
-          <span className="sec-num">// gallery --preview</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// gallery --preview</span>
+          <h2 className="section-title">
             Moments from <em>past editions</em>
           </h2>
-          <p className="sec-sub">Photos from previous programming contests and CTF nights.</p>
+          <p className="section-subtitle">Photos from previous programming contests and CTF nights.</p>
         </div>
 
         <div className="gallery-preview-grid">

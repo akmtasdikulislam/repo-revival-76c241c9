@@ -363,10 +363,10 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
   summaryRows.push({ label: "Format", value: cfg.formatLabel });
 
   return (
-    <div className="wiz-wrap">
+    <div className="wizard-wrap">
       <div>
         <StepBar flow={flow} stepIndex={step} />
-        <div className="wiz-card">
+        <div className="wizard-card">
           <FeeBanner
             feePerPerson={cfg.feePerPerson}
             teamSize={size ?? 1}
@@ -483,10 +483,10 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
           </AnimatePresence>
 
           {!done && (
-            <div className="wiz-nav">
+            <div className="wizard-nav">
               <button
                 type="button"
-                className="wiz-btn ghost"
+                className="wizard-btn ghost"
                 onClick={back}
                 disabled={step === 0}
               >
@@ -495,7 +495,7 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
               {current !== "payment" && (
                 <button
                   type="button"
-                  className="wiz-btn primary"
+                  className="wizard-btn primary"
                   onClick={next}
                   disabled={
                     current === "review" && !(agreeRules && agreeInfo && agreeMedia)
@@ -508,7 +508,7 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
               {current === "payment" && (
                 <button
                   type="button"
-                  className="wiz-btn mint"
+                  className="wizard-btn mint"
                   onClick={handlePay}
                   disabled={submitting}
                 >
@@ -525,15 +525,15 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
           )}
         </div>
 
-        <div className="wiz-side-notes">
-          <div className="wiz-note-box">
+        <div className="wizard-side-notes">
+          <div className="wizard-note-box">
             <h6>Secure checkout</h6>
             <p>
               Payment gateway integrates on submit — bKash, Nagad, cards. No card data
               ever touches our servers.
             </p>
           </div>
-          <div className="wiz-note-box">
+          <div className="wizard-note-box">
             <h6>Need help?</h6>
             <p>
               Email <a href={`mailto:${cfg.emailContact}`}>{cfg.emailContact}</a> or

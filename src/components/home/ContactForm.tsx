@@ -47,12 +47,12 @@ export function ContactForm() {
 
   return (
     <section className="section contact-section" id="contact">
-      <div className="sec-hdr">
-        <span className="sec-num">// contact --open</span>
-        <h2 className="sec-title">
+      <div className="section-header">
+        <span className="section-eyebrow">// contact --open</span>
+        <h2 className="section-title">
           Get in <em>touch</em>
         </h2>
-        <p className="sec-sub">
+        <p className="section-subtitle">
           Questions, partnership ideas, or press enquiries — drop us a line and the CSE Carnival team
           will reply within 48 hours.
         </p>
