@@ -2120,49 +2120,9 @@
   border-top: 0;
 }
 
-/* ============================================================
- * Legacy carnival tokens (migrated from carnival.css :root)
- * Kept for shared component classes still using --gold, --cyan,
- * --surface, --text, --fm, etc.
- * ============================================================ */
-:root {
-  /* Legacy aliases — single source of truth is the @theme block at the top.
-     Kept only so pre-migration selectors keep resolving; do NOT add new usages. */
-  --primary      : var(--color-cn-primary);
-  --primary-dark : var(--color-cn-primary-dark);
-  --primary-mid  : var(--color-cn-primary-mid);
-  --primary-light: var(--color-cn-primary-light);
-  --primary-pale : var(--color-cn-primary-pale);
+/* Legacy alias :root block removed — all rules now reference canonical
+ * --color-cn-*, --font-*, and --shadow-glow-* tokens defined in @theme. */
 
-  --bg       : var(--color-cn-bg);
-  --bg-2     : var(--color-cn-bg-2);
-  --surface  : var(--color-cn-surface);
-  --surface-2: var(--color-cn-surface-2);
-  --accent-bg: var(--color-cn-accent-bg);
-
-  --text         : var(--color-cn-ink);
-  --muted        : var(--color-cn-ink-dim);
-  --muted2       : var(--color-cn-ink-dimmer);
-  --border-strong: var(--color-cn-strong);
-  --border       : var(--color-cn-strong);
-  --border-soft  : var(--color-cn-strong);
-
-  --gold    : var(--color-cn-gold);
-  --gold-dim: var(--color-cn-gold-dim);
-  --cyan    : var(--color-cn-cyan);
-  --mint    : var(--color-cn-mint);
-  --coral   : var(--color-cn-coral);
-  --pink    : var(--color-cn-pink);
-
-  --flag        : var(--color-cn-gold);
-  --glow-gold   : var(--shadow-glow-gold);
-  --glow-cyan   : var(--shadow-glow-cyan);
-  --glow-primary: var(--shadow-glow-primary);
-
-  --fm: var(--font-mono);
-  --fd: var(--font-display);
-  --fs: var(--font-serif);
-}
 
 /* ============================================================
  * Registration + wizard shared classes (migrated from carnival.css)
