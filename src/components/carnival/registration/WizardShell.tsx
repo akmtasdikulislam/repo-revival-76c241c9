@@ -348,7 +348,7 @@ export function Wizard({ cfg }: { cfg: EventConfig }) {
     );
   }
 
-  const size = teamSize ?? cfg.feePerPerson && 1;
+  const size = teamSize ?? 1;
   const filled = members.filter((m) => m.fullName.trim()).length;
 
   const summaryRows: SummaryAsideRow[] = [
