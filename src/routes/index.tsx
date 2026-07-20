@@ -215,6 +215,13 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-key">const</span> idea = <span className="tk-fn">prototype</span>(vision);
+<span className="tk-fn">deploy</span>(idea);
+<span className="tk-cmt">{'// git commit -m "ship it"'}</span>
+              </pre>
+            </div>
           </div>
         </Reveal>
       </section>
