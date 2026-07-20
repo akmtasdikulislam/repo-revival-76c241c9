@@ -7,27 +7,19 @@ import { Reveal } from "@/components/carnival/Reveal";
 import { SponsorMarquee, SponsorShowcase } from "@/components/carnival/Sponsors";
 import { ContactForm } from "@/components/carnival/ContactForm";
 import { GALLERY_IMAGES } from "@/data/gallery";
+import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "BUP CSE Tech Carnival 2.0" },
-      {
-        name: "description",
-        content:
-          "BUP CSE Tech Carnival 2.0 — IUPC, CTF Championship & Hackathon at Bangladesh University of Professionals.",
-      },
-      { property: "og:title", content: "BUP CSE Tech Carnival 2.0" },
-      {
-        property: "og:description",
-        content: "Three tracks. One weekend. Compile your ambition.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    meta: buildMeta({
+      title: "BUP CSE Tech Carnival 2.0",
+      description:
+        "BUP CSE Tech Carnival 2.0 — IUPC, CTF Championship & Hackathon at Bangladesh University of Professionals. Three tracks. One weekend. Compile your ambition.",
+    }),
   }),
   component: Home,
 });
+
 
 function Home() {
   return (

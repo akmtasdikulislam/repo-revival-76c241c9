@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SiteLayout } from "@/components/carnival/SiteLayout";
+import { buildMeta } from "@/lib/seo";
+
 
 const FAQS = [
   {
@@ -28,15 +30,14 @@ const FAQS = [
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
-    meta: [
-      { title: "FAQ — BUP CSE Tech Carnival 2.0" },
-      { name: "description", content: "Frequently asked questions about BUP CSE Tech Carnival 2.0." },
-      { property: "og:title", content: "FAQ — BUP CSE Tech Carnival 2.0" },
-      { property: "og:description", content: "Answers about registration, eligibility, and payment." },
-    ],
+    meta: buildMeta({
+      title: "FAQ — BUP CSE Tech Carnival 2.0",
+      description: "Frequently asked questions about BUP CSE Tech Carnival 2.0.",
+    }),
   }),
   component: FAQ,
 });
+
 
 interface AskForm {
   name: string;

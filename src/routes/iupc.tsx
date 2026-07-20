@@ -1,60 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
 import { IupcRegistration } from "@/components/carnival/IupcRegistration";
-import { CountdownBar } from "@/components/carnival/CountdownBar";
+import { EventPage } from "@/components/carnival/EventPage";
+import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/iupc")({
   head: () => ({
-    meta: [
-      { title: "IUPC — BUP CSE Tech Carnival 2.0" },
-      {
-        name: "description",
-        content:
-          "Inter-University Programming Contest — a 5-hour ICPC-style algorithmic battle at BUP CSE Tech Carnival 2.0.",
-      },
-      { property: "og:title", content: "IUPC — BUP CSE Tech Carnival 2.0" },
-      { property: "og:description", content: "5 hours. Teams of three. ACM-ICPC format." },
-    ],
+    meta: buildMeta({
+      title: "IUPC — BUP CSE Tech Carnival 2.0",
+      description:
+        "Inter-University Programming Contest — a 5-hour ICPC-style algorithmic battle at BUP CSE Tech Carnival 2.0.",
+    }),
   }),
   component: IUPC,
 });
 
 function IUPC() {
   return (
-    <SiteLayout>
-      <section
-        className="event-hero"
-        style={{ ["--ev-bg" as any]: "#123a8c", ["--ev-fg" as any]: "#eef2ff" }}
-      >
-        <div className="event-hero-inner">
-          <span className="tc-status">Registration Opens Soon</span>
-          <h1 className="event-title">IUPC</h1>
-          <p className="event-sub">Inter-University Programming Contest</p>
-          <p className="event-desc">
-            A 5-hour ICPC-style algorithmic battle. Teams of three take on ranked problem sets under
-            ACM rules — one machine, one scoreboard, zero mercy.
-          </p>
-          <div className="event-meta">
-            <div>
-              <span className="em-num">3</span>
-              <span className="em-label">Team size</span>
-            </div>
-            <div>
-              <span className="em-num">5 hrs</span>
-              <span className="em-label">Duration</span>
-            </div>
-            <div>
-              <span className="em-num">ACM</span>
-              <span className="em-label">Format</span>
-            </div>
-          </div>
-          <CountdownBar reporting="Reporting 09:00 AM" />
-        </div>
-      </section>
-
-
-
-
+    <EventPage
+      hero={{
+        background: "#123a8c",
+        foreground: "#eef2ff",
+        tag: "Registration Opens Soon",
+        title: "IUPC",
+        sub: "Inter-University Programming Contest",
+        desc: "A 5-hour ICPC-style algorithmic battle. Teams of three take on ranked problem sets under ACM rules — one machine, one scoreboard, zero mercy.",
+        meta: [
+          { num: "3", label: "Team size" },
+          { num: "5 hrs", label: "Duration" },
+          { num: "ACM", label: "Format" },
+        ],
+        reporting: "Reporting 09:00 AM",
+      }}
+    >
       <section className="section">
         <div className="sec-hdr">
           <span className="sec-num">// rules.md</span>
@@ -80,6 +57,6 @@ function IUPC() {
         </div>
         <IupcRegistration />
       </section>
-    </SiteLayout>
+    </EventPage>
   );
 }

@@ -2126,41 +2126,44 @@
  * --surface, --text, --fm, etc.
  * ============================================================ */
 :root {
-  --primary      : #092763;
-  --primary-dark : #050f2e;
-  --primary-mid  : #123a8c;
-  --primary-light: #3f6fe0;
-  --primary-pale : #c9d6f7;
+  /* Legacy aliases — single source of truth is the @theme block at the top.
+     Kept only so pre-migration selectors keep resolving; do NOT add new usages. */
+  --primary      : var(--color-cn-primary);
+  --primary-dark : var(--color-cn-primary-dark);
+  --primary-mid  : var(--color-cn-primary-mid);
+  --primary-light: var(--color-cn-primary-light);
+  --primary-pale : var(--color-cn-primary-pale);
 
-  --bg       : #050b1f;
-  --bg-2     : #081536;
-  --surface  : #0c1f4d;
-  --surface-2: #0e2a63;
-  --accent-bg: #0a1a42;
+  --bg       : var(--color-cn-bg);
+  --bg-2     : var(--color-cn-bg-2);
+  --surface  : var(--color-cn-surface);
+  --surface-2: var(--color-cn-surface-2);
+  --accent-bg: var(--color-cn-accent-bg);
 
-  --text         : #eef2ff;
-  --muted        : rgba(238, 242, 255, .62);
-  --muted2       : rgba(238, 242, 255, .38);
-  --border-strong: rgba(146, 178, 255, .32);
-  --border       : var(--border-strong);
-  --border-soft  : var(--border-strong);
+  --text         : var(--color-cn-ink);
+  --muted        : var(--color-cn-ink-dim);
+  --muted2       : var(--color-cn-ink-dimmer);
+  --border-strong: var(--color-cn-strong);
+  --border       : var(--color-cn-strong);
+  --border-soft  : var(--color-cn-strong);
 
-  --gold    : #f2b705;
-  --gold-dim: #c99303;
-  --cyan    : #35d0e0;
-  --mint    : #2fe6a6;
-  --coral   : #ff6f6f;
-  --pink    : #ff5fa8;
+  --gold    : var(--color-cn-gold);
+  --gold-dim: var(--color-cn-gold-dim);
+  --cyan    : var(--color-cn-cyan);
+  --mint    : var(--color-cn-mint);
+  --coral   : var(--color-cn-coral);
+  --pink    : var(--color-cn-pink);
 
-  --flag        : var(--gold);
-  --glow-gold   : 0 0 24px rgba(242, 183, 5, .35);
-  --glow-cyan   : 0 0 24px rgba(53, 208, 224, .3);
-  --glow-primary: 0 0 40px rgba(63, 111, 224, .28);
+  --flag        : var(--color-cn-gold);
+  --glow-gold   : var(--shadow-glow-gold);
+  --glow-cyan   : var(--shadow-glow-cyan);
+  --glow-primary: var(--shadow-glow-primary);
 
-  --fm: "JetBrains Mono", monospace;
-  --fd: "Bebas Neue", sans-serif;
-  --fs: "Playfair Display", serif;
+  --fm: var(--font-mono);
+  --fd: var(--font-display);
+  --fs: var(--font-serif);
 }
+
 /* ============================================================
  * Registration + wizard shared classes (migrated from carnival.css)
  * ============================================================ */

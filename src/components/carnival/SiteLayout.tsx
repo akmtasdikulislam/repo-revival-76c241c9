@@ -2,17 +2,11 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { IconBrandGithub, IconBell } from "@tabler/icons-react";
 import { motion } from "framer-motion";
-
-const NAV_ITEMS = [
-  { to: "/iupc", label: "IUPC" },
-  { to: "/ctf", label: "CTF" },
-  { to: "/hackathon", label: "Hackathon" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/faq", label: "FAQ" },
-] as const;
+import { NAV_ITEMS } from "./nav-items";
 
 const navLinkBase =
   "text-[11px] uppercase tracking-[0.14em] text-cn-ink-dim transition-colors duration-200 hover:text-cn-cyan";
+
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
