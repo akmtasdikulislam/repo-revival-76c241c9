@@ -141,6 +141,14 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-key">for</span> (i = <span className="tk-num">0</span>; i {"<"} n; i++) {"{"}
+{"  "}dp[i] = <span className="tk-fn">max</span>(dp[i-<span className="tk-num">1</span>], dp[i-<span className="tk-num">2</span>] + a[i]);
+{"}"}
+<span className="tk-cmt">{"// Accepted · 0.04s"}</span>
+              </pre>
+            </div>
           </div>
         </Reveal>
 
