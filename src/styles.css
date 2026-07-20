@@ -195,7 +195,7 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--color-cn-bg);
+    color: var(--color-cn-ink);
   }
 }
