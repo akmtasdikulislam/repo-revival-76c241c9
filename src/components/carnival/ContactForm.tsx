@@ -7,13 +7,15 @@ const contactSchema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80),
   email: z.string().trim().email("Invalid email").max(160),
   university: z.string().trim().min(2, "University is required").max(160),
+  message: z.string().trim().min(10, "Message is too short").max(1000),
 });
 
 export function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", university: "" });
+  const [form, setForm] = useState({ name: "", email: "", university: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
