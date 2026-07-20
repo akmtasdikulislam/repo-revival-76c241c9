@@ -1,17 +1,51 @@
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { SPONSORS, sponsorLogo } from "@/data/sponsors";
 
 export function SponsorMarquee() {
   const EVENT_LABEL = "Walton Presents BUP CSE Tech Carnival 2.0";
-  const loop = [...SPONSORS, ...SPONSORS];
+  const controls = useAnimationControls();
+  const [paused, setPaused] = useState(false);
+  const progress = useRef(0);
+  const DURATION = 60;
+
+  useEffect(() => {
+    if (paused) {
+      controls.stop();
+      return;
+    }
+    const remaining = DURATION * (1 - progress.current);
+    controls.start({
+      x: ["-" + progress.current * 50 + "%", "-50%"],
+      transition: { duration: remaining, ease: "linear" },
+    }).then(() => {
+      progress.current = 0;
+      controls.start({
+        x: ["0%", "-50%"],
+        transition: { duration: DURATION, ease: "linear", repeat: Infinity },
+      });
+    });
+  }, [paused, controls]);
+
   return (
-    <section className="sponsor-marquee" aria-label="Event sponsors">
+    <section
+      className="sponsor-marquee"
+      aria-label="Event sponsors"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       <div className="sponsor-marquee-viewport">
         <motion.div
           className="sponsor-marquee-track"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-          style={{ animation: "none" }}
+          animate={controls}
+          initial={{ x: "0%" }}
+          onUpdate={(latest) => {
+            const x = String(latest.x ?? "0%");
+            const pct = parseFloat(x);
+            if (!isNaN(pct)) progress.current = Math.min(1, Math.abs(pct) / 50);
+          }}
         >
           {[0, 1].map((rep) => (
             <div key={`grp-${rep}`} className="sponsor-marquee-group">
@@ -40,13 +74,12 @@ export function SponsorMarquee() {
               ))}
             </div>
           ))}
-          {/* keep original flat loop hidden for backwards-compat; not needed */}
-          {false && loop.length}
         </motion.div>
       </div>
     </section>
   );
 }
+
 
 export function SponsorShowcase() {
   const title = SPONSORS[0];
