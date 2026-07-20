@@ -1000,8 +1000,8 @@
   gap: 11px;
   min-height: 122px;
   padding: 38px 18px 18px;
-  background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  background: linear-gradient(180deg, #fffdf7, #f8f3e5);
+  border-bottom: 1px solid rgba(75, 98, 60, .12);
 }
 .co-sponsor-meta {
   display: flex;
