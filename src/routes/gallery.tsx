@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
+import { SiteLayout } from "@/components/layout/SiteLayout";
 import { GALLERY_IMAGES, type GalleryImage } from "@/data/gallery";
 import { buildMeta } from "@/lib/seo";
 

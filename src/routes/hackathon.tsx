@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EventPage } from "@/components/carnival/EventPage";
-import { Wizard } from "@/components/carnival/registration/WizardShell";
-import { hackathonConfig } from "@/components/carnival/registration/events/hackathon.config";
+import { EventPage } from "@/components/event/EventPage";
+import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
+import { hackathonConfig } from "@/components/registration/events/hackathon.config";
 import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/hackathon")({
@@ -57,7 +57,7 @@ function Hackathon() {
           </h2>
           <p className="sec-sub">At least 1 member required — add up to 4.</p>
         </div>
-        <Wizard cfg={hackathonConfig} />
+        <RegistrationWizard cfg={hackathonConfig} />
       </section>
     </EventPage>
   );

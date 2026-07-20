@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
+import { SiteLayout } from "@/components/layout/SiteLayout";
 import { buildMeta } from "@/lib/seo";
 
 

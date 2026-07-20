@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
-import { CountdownBar } from "@/components/carnival/CountdownBar";
+import { SiteLayout } from "@/components/layout/SiteLayout";
+import { CountdownBar } from "@/components/event/EventCountdownBar";
 
 /**
  * Shared shell for /iupc, /ctf, /hackathon.

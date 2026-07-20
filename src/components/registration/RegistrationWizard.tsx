@@ -12,7 +12,7 @@ import {
   emailRe,
   filterInstitutions,
   type SummaryAsideRow,
-} from "./shared";
+} from "./wizard-fields";
 import {
   StepTeam,
   StepMembers,
@@ -21,7 +21,7 @@ import {
   StepProject,
   StepReview,
   StepPayment,
-} from "./steps";
+} from "./wizard-steps";
 import type {
   EventConfig,
   Member,
@@ -60,7 +60,7 @@ const emptyProject = (): Project => ({
   stack: "",
 });
 
-export function Wizard({ cfg }: { cfg: EventConfig }) {
+export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
   const chooser = cfg.team.kind === "chooser";
   const initialSize = cfg.team.kind === "fixed" ? cfg.team.size : null;
   const [teamSize, setTeamSize] = useState<number | null>(initialSize);

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EventPage } from "@/components/carnival/EventPage";
-import { Wizard } from "@/components/carnival/registration/WizardShell";
-import { ctfConfig } from "@/components/carnival/registration/events/ctf.config";
+import { EventPage } from "@/components/event/EventPage";
+import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
+import { ctfConfig } from "@/components/registration/events/ctf.config";
 import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/ctf")({
@@ -60,7 +60,7 @@ function CTF() {
           </h2>
           <p className="sec-sub">At least 1 member required — add up to 4.</p>
         </div>
-        <Wizard cfg={ctfConfig} />
+        <RegistrationWizard cfg={ctfConfig} />
       </section>
     </EventPage>
   );

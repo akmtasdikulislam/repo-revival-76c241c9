@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { IconCamera } from "@tabler/icons-react";
-import { IdCardUploader } from "../IdCardUploader";
+import { IdCardUploader } from "@/components/id-card/IdCardUploader";
 import {
   Field,
   PhoneInput,
@@ -9,7 +9,7 @@ import {
   YEAR_OPTIONS,
   ROLE_OPTIONS,
   TSHIRT_SIZES,
-} from "./shared";
+} from "./wizard-fields";
 import type { Member, Coach, Project, ErrFn, TouchFn, EventConfig } from "./types";
 
 /* ---------------- StepTeam ---------------- */
@@ -406,7 +406,7 @@ export function StepSolo({
 }
 
 /* ---------------- StepCoach ---------------- */
-import { PhotoUploader } from "./shared";
+import { PhotoUploader } from "./wizard-fields";
 
 export function StepCoach({
   coach,

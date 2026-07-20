@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { IconArrowUpRight } from "@tabler/icons-react";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
-import { Countdown } from "@/components/carnival/Countdown";
-import { Reveal } from "@/components/carnival/Reveal";
-import { SponsorMarquee, SponsorShowcase } from "@/components/carnival/Sponsors";
-import { ContactForm } from "@/components/carnival/ContactForm";
+import { SiteLayout } from "@/components/layout/SiteLayout";
+import { Countdown } from "@/components/home/HeroCountdown";
+import { Reveal } from "@/components/home/RevealOnScroll";
+import { SponsorMarquee, SponsorShowcase } from "@/components/home/SponsorsMarquee";
+import { ContactForm } from "@/components/home/ContactForm";
 import { GALLERY_IMAGES } from "@/data/gallery";
 import { buildMeta } from "@/lib/seo";
 

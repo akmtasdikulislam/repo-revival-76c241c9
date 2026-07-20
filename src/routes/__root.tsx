@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportLovableError } from "../lib/errors/lovable-error-reporting";
 import { buildMeta, SITE_NAME } from "../lib/seo";
 
 
