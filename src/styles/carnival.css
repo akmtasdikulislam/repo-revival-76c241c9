@@ -963,37 +963,6 @@ em {
 
 /* responsive */
 @media(max-width:820px) {
-  .nav-links {
-    position      : absolute;
-    top           : calc(100% + 10px);
-    left          : 0;
-    right         : 0;
-    background    : var(--surface-2);
-    border        : 1px solid var(--border);
-    border-radius : 16px;
-    flex-direction: column;
-    gap           : 0;
-    padding       : 8px;
-    display       : none;
-  }
-
-  .nav-links li {
-    width: 100%;
-  }
-
-  .nav-links a {
-    display: block;
-    padding: 12px 14px;
-  }
-
-  .nav.nav-open .nav-links {
-    display: flex;
-  }
-
-  .nav-burger {
-    display: flex;
-  }
-
   .track-info {
     padding: 32px;
   }
