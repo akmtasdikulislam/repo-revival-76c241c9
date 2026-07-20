@@ -765,109 +765,8 @@ em {
   }
 }
 
-/* ---------- FAQ ACCORDION ---------- */
-.accordion {
-  max-width     : 700px;
-  margin        : 0 auto;
-  display       : flex;
-  flex-direction: column;
-  gap           : 10px;
-}
+/* FAQ accordion + search migrated to src/styles.css (Phase 6) */
 
-.acc-item {
-  border       : 1px solid var(--border);
-  border-radius: 12px;
-  overflow     : hidden;
-  background   : var(--surface);
-  transition   : border-color .2s;
-}
-
-.acc-item.open {
-  border-color: var(--border-strong);
-}
-
-.acc-head {
-  width          : 100%;
-  text-align     : left;
-  background     : none;
-  border         : 0;
-  padding        : 18px 20px;
-  font-family    : var(--fm);
-  font-size      : 13.5px;
-  font-weight    : 600;
-  cursor         : pointer;
-  display        : flex;
-  justify-content: space-between;
-  align-items    : center;
-  color          : var(--text);
-}
-
-.acc-icon {
-  font-size : 16px;
-  color     : var(--gold);
-  transition: transform .3s;
-}
-
-.acc-item.open .acc-icon {
-  transform: rotate(45deg);
-}
-
-.acc-body {
-  max-height: 0;
-  overflow  : hidden;
-  transition: max-height .35s ease;
-}
-
-.acc-item.open .acc-body {
-  max-height: 260px;
-}
-
-.acc-body p {
-  padding    : 0 20px 18px;
-  font-size  : 13px;
-  color      : var(--muted);
-  line-height: 1.7;
-}
-
-/* FAQ search */
-.faq-search {
-  max-width: 700px;
-  margin   : 0 auto 26px;
-  position : relative;
-}
-
-.faq-search input {
-  width        : 100%;
-  font-family  : var(--fm);
-  font-size    : 13px;
-  padding      : 14px 18px 14px 40px;
-  background   : var(--surface);
-  border       : 1px solid var(--border);
-  border-radius: 100px;
-  color        : var(--text);
-}
-
-.faq-search input:focus {
-  outline     : 2px solid var(--cyan);
-  border-color: var(--cyan);
-}
-
-.faq-search::before {
-  content  : "⌕";
-  position : absolute;
-  left     : 16px;
-  top      : 50%;
-  transform: translateY(-50%);
-  color    : var(--muted2);
-  font-size: 16px;
-}
-
-.faq-empty {
-  text-align: center;
-  color     : var(--muted);
-  font-size : 13px;
-  padding   : 20px;
-}
 
 /* ---------- ADMIN ---------- */
 .admin-warning {
@@ -1341,55 +1240,8 @@ em {
   margin    : 0 auto;
 }
 
-.lightbox {
-  position       : fixed;
-  inset          : 0;
-  background     : rgba(2, 6, 18, .9);
-  z-index        : 500;
-  display        : none;
-  align-items    : center;
-  justify-content: center;
-  padding        : 30px;
-}
+/* .lightbox class-based rules removed (Phase 6) — gallery uses id="lightbox" */
 
-.lightbox.open {
-  display: flex;
-}
-
-.lightbox-inner {
-  position  : relative;
-  max-width : 92vw;
-  max-height: 86vh;
-}
-
-.lightbox-inner img {
-  max-width    : 92vw;
-  max-height   : 78vh;
-  border-radius: 12px;
-  display      : block;
-  margin       : 0 auto;
-}
-
-.lightbox-cap {
-  color     : #fff;
-  text-align: center;
-  font-size : 13px;
-  margin-top: 14px;
-  opacity   : .85;
-}
-
-.lightbox-close {
-  position   : fixed;
-  top        : 22px;
-  right      : 28px;
-  color      : #fff;
-  font-size  : 28px;
-  line-height: 1;
-  cursor     : pointer;
-  background : none;
-  border     : 0;
-  z-index    : 501;
-}
 
 /* ---------- ADMIN GALLERY MANAGER ---------- */
 .admin-upload-form {
