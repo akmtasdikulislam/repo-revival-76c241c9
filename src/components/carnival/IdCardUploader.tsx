@@ -149,16 +149,16 @@ function CropModal({
       className="fixed inset-0 z-[1000] flex items-center justify-center p-4 backdrop-blur-md bg-[rgba(3,10,25,0.78)]"
       onClick={(e) => e.target === e.currentTarget && onCancel()}
     >
-      <div className="flex w-[min(760px,100%)] flex-col overflow-hidden rounded-2xl border border-[color:var(--border-strong,#1f3b6b)] bg-[color:var(--surface-1,#0b1428)]">
-        <header className="flex items-center justify-between border-b border-[color:var(--border-strong,#1f3b6b)] px-[18px] py-[14px]">
-          <strong className="font-mono text-[13px] tracking-wider text-[color:var(--text,#cde3ff)]">
+      <div className="flex w-[min(760px,100%)] flex-col overflow-hidden rounded-2xl border border-[color:var(--color-cn-strong,#1f3b6b)] bg-[color:var(--color-cn-surface,#0b1428)]">
+        <header className="flex items-center justify-between border-b border-[color:var(--color-cn-strong,#1f3b6b)] px-[18px] py-[14px]">
+          <strong className="font-mono text-[13px] tracking-wider text-[color:var(--color-cn-ink,#cde3ff)]">
             // crop your university id card
           </strong>
           <button
             type="button"
             onClick={onCancel}
             aria-label="Close"
-            className="flex cursor-pointer border-0 bg-transparent p-1 text-[color:var(--muted,#6f89b6)]"
+            className="flex cursor-pointer border-0 bg-transparent p-1 text-[color:var(--color-cn-ink-dim,#6f89b6)]"
           >
             <IconX size={18} />
           </button>
@@ -179,9 +179,9 @@ function CropModal({
           />
         </div>
 
-        <div className="grid gap-3.5 border-t border-[color:var(--border-strong,#1f3b6b)] p-4 font-mono text-xs text-[color:var(--text,#cde3ff)]">
+        <div className="grid gap-3.5 border-t border-[color:var(--color-cn-strong,#1f3b6b)] p-4 font-mono text-xs text-[color:var(--color-cn-ink,#cde3ff)]">
           <label className="grid gap-1.5">
-            <span className="text-[color:var(--muted,#6f89b6)]">Zoom</span>
+            <span className="text-[color:var(--color-cn-ink-dim,#6f89b6)]">Zoom</span>
             <input
               type="range"
               min={1}
@@ -213,7 +213,7 @@ function CropModal({
           </div>
         </div>
 
-        <footer className="flex justify-end gap-2.5 border-t border-[color:var(--border-strong,#1f3b6b)] p-3.5">
+        <footer className="flex justify-end gap-2.5 border-t border-[color:var(--color-cn-strong,#1f3b6b)] p-3.5">
           <button type="button" className="wiz-btn ghost" onClick={onCancel}>
             Cancel
           </button>

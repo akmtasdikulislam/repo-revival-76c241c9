@@ -38,11 +38,11 @@ export function CountdownBar({
             fontSize: 18,
             fontWeight: 700,
             background: "transparent",
-            color: "var(--gold, #f2b705)",
+            color: "var(--color-cn-gold, #f2b705)",
             boxShadow: "none",
           }}
           dividerStyle={{ color: "transparent", height: 0 }}
-          separatorStyle={{ color: "var(--gold, #f2b705)", size: "3px" }}
+          separatorStyle={{ color: "var(--color-cn-gold, #f2b705)", size: "3px" }}
           duration={0.5}
         />
       </div>

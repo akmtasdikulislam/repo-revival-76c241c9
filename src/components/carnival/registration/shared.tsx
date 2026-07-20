@@ -181,8 +181,8 @@ export function InstitutionField({
             left: 0,
             right: 0,
             zIndex: 20,
-            background: "var(--surface-2)",
-            border: "1px solid var(--border)",
+            background: "var(--color-cn-surface-2)",
+            border: "1px solid var(--color-cn-strong)",
             borderRadius: 10,
             marginTop: 4,
             overflow: "hidden",
@@ -203,10 +203,10 @@ export function InstitutionField({
                 padding: "10px 14px",
                 background: "transparent",
                 border: 0,
-                color: "var(--text)",
+                color: "var(--color-cn-ink)",
                 fontSize: 13,
                 cursor: "pointer",
-                fontFamily: "var(--fm)",
+                fontFamily: "var(--font-mono)",
               }}
             >
               {s}
@@ -306,7 +306,7 @@ export function SuccessPanel({
       <h3>Team registered</h3>
       <p>
         Payment received.{" "}
-        <strong style={{ color: "var(--text)" }}>{teamName}</strong> is officially
+        <strong style={{ color: "var(--color-cn-ink)" }}>{teamName}</strong> is officially
         in the {subject}.
       </p>
       <div className="wiz-team-code">{code}</div>
@@ -341,7 +341,7 @@ export function SizeChart({
         <svg viewBox="0 0 220 180" width="100%" height="150" fill="none">
           <path
             d="M70 22 L52 34 L22 52 L34 76 L58 64 L58 158 L162 158 L162 64 L186 76 L198 52 L168 34 L150 22 C144 36 132 44 110 44 C88 44 76 36 70 22 Z"
-            stroke="var(--gold)"
+            stroke="var(--color-cn-gold)"
             strokeWidth="1.6"
             fill="rgba(242,183,5,0.05)"
             strokeLinejoin="round"
@@ -351,7 +351,7 @@ export function SizeChart({
             y1="88"
             x2="162"
             y2="88"
-            stroke="var(--mint)"
+            stroke="var(--color-cn-mint)"
             strokeWidth="1"
             strokeDasharray="3 3"
             opacity="0.7"
@@ -360,9 +360,9 @@ export function SizeChart({
             x="110"
             y="83"
             textAnchor="middle"
-            fill="var(--mint)"
+            fill="var(--color-cn-mint)"
             fontSize="9"
-            fontFamily="var(--fm)"
+            fontFamily="var(--font-mono)"
             fontWeight="700"
           >
             chest {spec.chest}
@@ -372,7 +372,7 @@ export function SizeChart({
             y1="64"
             x2="172"
             y2="158"
-            stroke="var(--mint)"
+            stroke="var(--color-cn-mint)"
             strokeWidth="1"
             strokeDasharray="3 3"
             opacity="0.7"
@@ -380,9 +380,9 @@ export function SizeChart({
           <text
             x="178"
             y="115"
-            fill="var(--mint)"
+            fill="var(--color-cn-mint)"
             fontSize="9"
-            fontFamily="var(--fm)"
+            fontFamily="var(--font-mono)"
             fontWeight="700"
             transform="rotate(90 178 115)"
             textAnchor="middle"
@@ -393,9 +393,9 @@ export function SizeChart({
             x="110"
             y="115"
             textAnchor="middle"
-            fill="var(--gold)"
+            fill="var(--color-cn-gold)"
             fontSize="28"
-            fontFamily="var(--fm)"
+            fontFamily="var(--font-mono)"
             fontWeight="800"
             opacity="0.85"
           >
@@ -513,8 +513,8 @@ export function TeamSizeChooser({
             <span
               style={{
                 marginTop: 10,
-                fontFamily: "var(--fm)",
-                color: "var(--gold)",
+                fontFamily: "var(--font-mono)",
+                color: "var(--color-cn-gold)",
                 fontSize: 12,
                 fontWeight: 700,
               }}
