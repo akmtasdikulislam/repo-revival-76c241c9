@@ -1,44 +1,18 @@
-import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { SPONSORS, sponsorLogo } from "@/data/sponsors";
 
 export function SponsorMarquee() {
   const EVENT_LABEL = "Walton Presents BUP CSE Tech Carnival 2.0";
-  const controls = useAnimationControls();
-  const pausedRef = useRef(false);
-
-  const run = () => {
-    controls.start({
-      x: ["0%", "-50%"],
-      transition: { duration: 60, ease: "linear", repeat: Infinity },
-    });
-  };
-
-  useEffect(() => {
-    run();
-     
-  }, []);
-
-  const handleEnter = () => {
-    pausedRef.current = true;
-    controls.stop();
-  };
-  const handleLeave = () => {
-    if (!pausedRef.current) return;
-    pausedRef.current = false;
-    run();
-  };
-
+  const loop = [...SPONSORS, ...SPONSORS];
   return (
     <section className="sponsor-marquee" aria-label="Event sponsors">
-      <div
-        className="sponsor-marquee-viewport"
-        onMouseEnter={handleEnter}
-        onMouseLeave={handleLeave}
-        onFocus={handleEnter}
-        onBlur={handleLeave}
-      >
-        <motion.div className="sponsor-marquee-track" animate={controls}>
+      <div className="sponsor-marquee-viewport">
+        <motion.div
+          className="sponsor-marquee-track"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+          style={{ animation: "none" }}
+        >
           {[0, 1].map((rep) => (
             <div key={`grp-${rep}`} className="sponsor-marquee-group">
               <span className="sponsor-marquee-event" aria-hidden={rep === 1}>
@@ -66,12 +40,13 @@ export function SponsorMarquee() {
               ))}
             </div>
           ))}
+          {/* keep original flat loop hidden for backwards-compat; not needed */}
+          {false && loop.length}
         </motion.div>
       </div>
     </section>
   );
 }
-
 
 export function SponsorShowcase() {
   const title = SPONSORS[0];
