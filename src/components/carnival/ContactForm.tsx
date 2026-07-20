@@ -7,13 +7,15 @@ const contactSchema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80),
   email: z.string().trim().email("Invalid email").max(160),
   university: z.string().trim().min(2, "University is required").max(160),
+  message: z.string().trim().min(10, "Message is too short").max(1000),
 });
 
 export function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", university: "" });
+  const [form, setForm] = useState({ name: "", email: "", university: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -113,13 +115,25 @@ export function ContactForm() {
               />
               {errors.university && <em className="contact-err">{errors.university}</em>}
             </label>
+            <label className="contact-field">
+              <span>Message</span>
+              <textarea
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Tell us how we can help…"
+                rows={5}
+                maxLength={1000}
+              />
+              {errors.message && <em className="contact-err">{errors.message}</em>}
+            </label>
             <div className="contact-actions">
               <button type="submit" className="btn-primary" disabled={submitting}>
-                <IconSend size={16} style={{ marginRight: 8, verticalAlign: "-3px" }} />
-                {submitting ? "Sending…" : "Send message"}
+                <IconSend size={16} />
+                <span>{submitting ? "Sending…" : "Send message"}</span>
               </button>
               <span className="contact-note">We reply within 48 hours.</span>
             </div>
+
           </>
         )}
       </motion.form>
