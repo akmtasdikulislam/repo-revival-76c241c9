@@ -15,15 +15,14 @@ const IMAGES: GalleryImage[] = Array.from({ length: 3 })
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
-    meta: [
-      { title: "Gallery — BUP CSE Tech Carnival 2.0" },
-      { name: "description", content: "Photos from BUP CSE Tech Carnival events." },
-      { property: "og:title", content: "Gallery — BUP CSE Tech Carnival 2.0" },
-      { property: "og:description", content: "Moments from past programming contests and CTF nights." },
-    ],
+    meta: buildMeta({
+      title: "Gallery — BUP CSE Tech Carnival 2.0",
+      description: "Photos from BUP CSE Tech Carnival events.",
+    }),
   }),
   component: Gallery,
 });
+
 
 function Gallery() {
   const [active, setActive] = useState<null | GalleryImage>(null);
