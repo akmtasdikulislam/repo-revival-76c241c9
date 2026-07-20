@@ -179,8 +179,15 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-visual">
+              <pre className="code-block dark"><span className="c-cm">$</span> nc chall.bupctf.io 1337
+<span className="c-str">Welcome, agent. Find the flag.</span>
+<span className="c-fn">strings</span> binary | <span className="c-fn">grep</span> <span className="c-str">flag{"{"}</span>
+<span className="c-flag">flag{"{n0t_th3_r34l_0ne}"}</span></pre>
+            </div>
           </div>
         </Reveal>
+
 
         <Reveal delay={0.2}>
           <div
@@ -206,8 +213,14 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-visual">
+              <pre className="code-block"><span className="c-var">const</span> idea = <span className="c-fn">prototype</span>(<span className="c-var">vision</span>);
+<span className="c-fn">deploy</span>(idea);
+<span className="c-cm">{"// git commit -m \"ship it\""}</span></pre>
+            </div>
           </div>
         </Reveal>
+
       </section>
 
       {/* EVENT TIMELINE */}
