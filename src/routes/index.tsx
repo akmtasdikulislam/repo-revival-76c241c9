@@ -141,8 +141,15 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-visual">
+              <pre className="code-block"><span className="c-kw">for</span> (<span className="c-var">i</span> = <span className="c-num">0</span>; <span className="c-var">i</span> &lt; <span className="c-var">n</span>; <span className="c-var">i</span>++) {"{"}
+  <span className="c-var">dp</span>[<span className="c-var">i</span>] = <span className="c-fn">max</span>(<span className="c-var">dp</span>[<span className="c-var">i</span>-<span className="c-num">1</span>], <span className="c-var">dp</span>[<span className="c-var">i</span>-<span className="c-num">2</span>] + <span className="c-var">a</span>[<span className="c-var">i</span>]);
+{"}"}
+<span className="c-cm">{"// Accepted · 0.04s"}</span></pre>
+            </div>
           </div>
         </Reveal>
+
 
         <Reveal delay={0.1}>
           <div
