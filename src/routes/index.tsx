@@ -180,6 +180,14 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-var">$</span> <span className="tk-fn">nc</span> <span className="tk-str">chall.bupctf.io</span> <span className="tk-num">1337</span>
+<span className="tk-str">Welcome, agent. Find the flag.</span>
+<span className="tk-fn">strings</span> <span className="tk-str">binary</span> | <span className="tk-fn">grep</span> <span className="tk-str">flag{"{"}</span>
+<span className="tk-num">flag{"{n0t_th3_r34l_0ne}"}</span>
+              </pre>
+            </div>
           </div>
         </Reveal>
 
