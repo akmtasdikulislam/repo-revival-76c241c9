@@ -329,7 +329,15 @@ export function RegistrationWizard({ cfg }: { cfg: EventConfig }) {
           event: cfg.key,
         },
       });
-      window.location.href = gatewayUrl;
+      if (window.top && window.top !== window.self) {
+        try {
+          window.top.location.href = gatewayUrl;
+        } catch {
+          window.open(gatewayUrl, "_blank", "noopener,noreferrer");
+        }
+      } else {
+        window.location.href = gatewayUrl;
+      }
     } catch (e) {
       setSubmitting(false);
       setPayError(e instanceof Error ? e.message : "Payment initiation failed");
