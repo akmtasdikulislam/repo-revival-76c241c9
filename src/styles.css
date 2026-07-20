@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "./styles/carnival.css" layer(base);
+
 
 
 /* ============================================================
@@ -2096,3 +2096,539 @@
   padding-top: 0;
   border-top: 0;
 }
+
+/* ============================================================
+ * Legacy carnival tokens (migrated from carnival.css :root)
+ * Kept for shared component classes still using --gold, --cyan,
+ * --surface, --text, --fm, etc.
+ * ============================================================ */
+:root {
+  --primary      : #092763;
+  --primary-dark : #050f2e;
+  --primary-mid  : #123a8c;
+  --primary-light: #3f6fe0;
+  --primary-pale : #c9d6f7;
+
+  --bg       : #050b1f;
+  --bg-2     : #081536;
+  --surface  : #0c1f4d;
+  --surface-2: #0e2a63;
+  --accent-bg: #0a1a42;
+
+  --text         : #eef2ff;
+  --muted        : rgba(238, 242, 255, .62);
+  --muted2       : rgba(238, 242, 255, .38);
+  --border-strong: rgba(146, 178, 255, .32);
+  --border       : var(--border-strong);
+  --border-soft  : var(--border-strong);
+
+  --gold    : #f2b705;
+  --gold-dim: #c99303;
+  --cyan    : #35d0e0;
+  --mint    : #2fe6a6;
+  --coral   : #ff6f6f;
+  --pink    : #ff5fa8;
+
+  --flag        : var(--gold);
+  --glow-gold   : 0 0 24px rgba(242, 183, 5, .35);
+  --glow-cyan   : 0 0 24px rgba(53, 208, 224, .3);
+  --glow-primary: 0 0 40px rgba(63, 111, 224, .28);
+
+  --fm: "JetBrains Mono", monospace;
+  --fd: "Bebas Neue", sans-serif;
+  --fs: "Playfair Display", serif;
+}
+/* ============================================================
+ * Registration + wizard shared classes (migrated from carnival.css)
+ * ============================================================ */
+
+@media(max-width:520px) {
+  .member-row {
+    grid-template-columns: 1fr;
+    grid-template-areas  : none;
+  }
+  .member-num {
+    display: none;
+  }
+}
+
+.reg-card {
+  max-width    : 640px;
+  margin       : 0 auto;
+  background   : var(--surface);
+  border       : 1px solid var(--border);
+  border-radius: 20px;
+  padding      : 36px;
+  box-shadow   : 0 30px 70px -50px rgba(0, 0, 0, .8);
+}
+
+.reg-card form {
+  display       : flex;
+  flex-direction: column;
+  gap           : 18px;
+}
+
+.reg-card label {
+  display       : flex;
+  flex-direction: column;
+  gap           : 8px;
+  font-size     : 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color         : var(--muted);
+  font-weight   : 600;
+}
+
+.reg-card input,
+.reg-card select,
+.reg-card textarea {
+  font-family   : var(--fm);
+  font-size     : 14px;
+  padding       : 12px 14px;
+  border        : 1px solid var(--border);
+  border-radius : 8px;
+  background    : var(--accent-bg);
+  color         : var(--text);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight   : 400;
+}
+
+.reg-card input::placeholder,
+.reg-card textarea::placeholder {
+  color: var(--muted2);
+}
+
+.reg-card input:focus,
+.reg-card select:focus,
+.reg-card textarea:focus {
+  outline       : 2px solid var(--cyan);
+  outline-offset: 1px;
+  border-color  : var(--cyan);
+}
+
+.reg-card textarea {
+  resize: vertical;
+}
+
+.members-block {
+  display       : flex;
+  flex-direction: column;
+  gap           : 12px;
+}
+
+.members-label {
+  font-size     : 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color         : var(--muted);
+  font-weight   : 600;
+}
+
+.member-row {
+  display              : grid;
+  grid-template-columns: 34px 1fr 1fr 1fr 28px;
+  gap                  : 8px;
+  align-items          : center;
+}
+
+.member-row input {
+  padding  : 10px 12px;
+  font-size: 13px;
+}
+
+.member-num {
+  font-size  : 11px;
+  color      : var(--gold);
+  font-weight: 700;
+}
+
+.member-remove {
+  background   : none;
+  border       : 1px solid var(--border);
+  border-radius: 6px;
+  color        : var(--muted);
+  cursor       : pointer;
+  width        : 26px;
+  height       : 26px;
+  font-size    : 12px;
+}
+
+.member-remove:hover {
+  background  : var(--accent-bg);
+  color       : var(--coral);
+  border-color: var(--coral);
+}
+
+.reg-success {
+  background     : rgba(47, 230, 166, .12);
+  border         : 1px solid var(--mint);
+  color          : var(--mint);
+  padding        : 14px 18px;
+  border-radius  : 10px;
+  font-size      : 13px;
+  margin-bottom  : 22px;
+  display        : flex;
+  flex-wrap      : wrap;
+  align-items    : center;
+  gap            : 10px;
+  justify-content: space-between;
+}
+
+.copy-btn {
+  font-family   : var(--fm);
+  font-size     : 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  background    : var(--mint);
+  color         : var(--primary-dark);
+  border        : 0;
+  border-radius : 100px;
+  padding       : 6px 12px;
+  cursor        : pointer;
+  font-weight   : 700;
+}
+
+.copy-btn:hover {
+  background: #5cf0c0;
+}
+
+.status-members-label {
+  font-size     : 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color         : var(--muted2);
+  margin-top    : 14px;
+}
+
+.modal-box {
+  width        : min(560px, 100%);
+  max-height   : 86vh;
+  overflow-y   : auto;
+  background   : var(--surface-2);
+  border       : 1px solid var(--border-strong);
+  border-radius: 18px;
+  padding      : 30px;
+  box-shadow   : 0 40px 90px -30px rgba(0, 0, 0, .8);
+}
+
+.modal-box h3 {
+  font-family    : var(--fd);
+  font-size      : 26px;
+  margin-bottom  : 18px;
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+}
+
+.detail-member-row {
+  background   : var(--accent-bg);
+  border       : 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding      : 10px 12px;
+  font-size    : 12.5px;
+  margin-bottom: 6px;
+}
+
+.detail-member-row b {
+  color: var(--gold);
+}
+
+.reg-card {
+  width    : min(920px, 100%);
+  max-width: 920px;
+  padding  : clamp(22px, 4vw, 38px);
+}
+
+.reg-card input,
+.reg-card select,
+.reg-card textarea {
+  width    : 100%;
+  min-width: 0;
+}
+
+.reg-card .btn-primary[type="submit"] {
+  align-self: flex-start;
+  min-width : 220px;
+  text-align: center;
+}
+
+.member-row {
+  width                : 100%;
+  grid-template-columns: 38px repeat(3, minmax(0, 1fr)) 32px;
+  grid-template-areas  : "num name email phone action";
+  gap                  : 10px;
+  align-items          : center;
+}
+
+.member-row .member-num {
+  grid-area: num;
+}
+
+.member-row .member-name,
+.member-row .edit-m-name {
+  grid-area: name;
+}
+
+.member-row .member-email,
+.member-row .edit-m-email {
+  grid-area: email;
+}
+
+.member-row .member-phone,
+.member-row .edit-m-phone {
+  grid-area: phone;
+}
+
+.member-row .member-remove,
+.member-row>span:last-child {
+  grid-area: action;
+}
+
+.coach-block {
+  display       : flex;
+  flex-direction: column;
+  gap           : 12px;
+  padding       : 18px;
+  border        : 1px solid var(--border);
+  border-radius : 14px;
+  background    : rgba(10, 26, 66, .62);
+}
+
+.coach-grid {
+  display              : grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap                  : 12px;
+}
+
+.coach-grid label {
+  font-size: 10.5px;
+}
+
+.institution-autocomplete {
+  position: relative;
+  display : block;
+  width   : 100%;
+}
+
+.institution-suggestions {
+  position     : absolute;
+  z-index      : 40;
+  top          : calc(100% + 7px);
+  left         : 0;
+  right        : 0;
+  max-height   : 250px;
+  overflow-y   : auto;
+  padding      : 6px;
+  background   : #0b1d49;
+  border       : 1px solid var(--border-strong);
+  border-radius: 12px;
+  box-shadow   : 0 22px 50px -24px rgba(0, 0, 0, .95);
+}
+
+.institution-suggestions[hidden] {
+  display: none !important;
+}
+
+.institution-option {
+  width        : 100%;
+  display      : block;
+  border       : 0;
+  border-radius: 8px;
+  background   : transparent;
+  color        : var(--text);
+  font-family  : var(--fm);
+  font-size    : 12px;
+  line-height  : 1.45;
+  text-align   : left;
+  padding      : 10px 11px;
+  cursor       : pointer;
+}
+
+.institution-option:hover,
+.institution-option.active {
+  background: var(--surface-2);
+  color     : var(--cyan);
+}
+
+@media(max-width:760px) {
+  .coach-grid {
+    grid-template-columns: 1fr;
+  }
+  .member-row {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    grid-template-areas  :
+      "num name action"
+      ". email email"
+      ". phone phone";
+    padding      : 12px;
+    border       : 1px solid var(--border-soft);
+    border-radius: 12px;
+    background   : rgba(10, 26, 66, .36);
+  }
+  .member-row>span:last-child {
+    min-height: 1px;
+  }
+  .reg-card .btn-primary[type="submit"] {
+    width    : 100%;
+    min-width: 0;
+  }
+}
+
+.reg-card {
+    border-radius: 16px;
+  }
+
+.phone-input {
+  display    : flex;
+  align-items: stretch;
+  width      : 100%;
+  min-width  : 0;
+}
+
+.phone-prefix {
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  padding        : 0 12px;
+  border         : 1px solid var(--border);
+  border-right   : 0;
+  border-radius  : 8px 0 0 8px;
+  background     : rgba(146, 178, 255, .10);
+  color          : var(--cyan);
+  font-family    : var(--fm);
+  font-size      : 13px;
+  letter-spacing : 0;
+  text-transform : none;
+  white-space    : nowrap;
+}
+
+.reg-card .phone-input input,
+.modal-box .phone-input input {
+  border-radius: 0 8px 8px 0;
+  flex         : 1;
+  min-width    : 0;
+}
+
+.members-block {
+  gap: 14px;
+}
+
+.member-row {
+  display      : block;
+  width        : 100%;
+  padding      : 16px;
+  border       : 1px solid var(--border);
+  border-radius: 14px;
+  background   : rgba(10, 26, 66, .42);
+}
+
+.member-card-head .member-num {
+  color         : var(--gold);
+  font-size     : 11px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+}
+
+.member-remove {
+  width      : auto;
+  height     : auto;
+  padding    : 6px 9px;
+  color      : var(--coral);
+  font-family: var(--fm);
+  font-size  : 10px;
+}
+
+.reg-card button:disabled,
+.modal-box button:disabled {
+  opacity  : .55;
+  cursor   : not-allowed;
+  transform: none !important;
+}
+
+@media(max-width:560px) {
+  .member-row {
+    padding: 13px;
+  }
+}
+
+.modal-box {
+  width: min(880px, 100%);
+}
+
+.detail-member-number {
+  font-size     : 9px !important;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color         : var(--cyan) !important;
+}
+
+.modal-box .member-fields label,
+.modal-box .coach-grid label {
+  display       : flex;
+  flex-direction: column;
+  gap           : 6px;
+  font-size     : 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color         : var(--muted);
+  font-weight   : 600;
+}
+
+.modal-box .member-fields input,
+.modal-box .coach-grid input {
+  width         : 100%;
+  min-width     : 0;
+  font-family   : var(--fm);
+  font-size     : 13px;
+  padding       : 10px 12px;
+  border        : 1px solid var(--border);
+  border-radius : 8px;
+  background    : var(--accent-bg);
+  color         : var(--text);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight   : 400;
+}
+
+.modal-box .member-fields input:focus,
+.modal-box .coach-grid input:focus {
+  outline       : 2px solid var(--cyan);
+  outline-offset: 1px;
+  border-color  : var(--cyan);
+}
+
+.modal-box .phone-input input {
+  border-radius: 0 8px 8px 0;
+}
+
+@media(max-width:520px) {
+  .reg-card {
+    padding: 18px !important;
+  }
+  .coach-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.admin-journey-editor>.members-label {
+  width: 100%
+}
+
+.status-phone-input {
+  width      : 100%;
+  display    : flex !important;
+  align-items: stretch !important
+}
+
+.status-phone-input .phone-prefix {
+  display    : flex;
+  align-items: center
+}
+
+.status-phone-input input {
+  min-width    : 0;
+  flex         : 1;
+  border-radius: 0 10px 10px 0 !important
+}
+
