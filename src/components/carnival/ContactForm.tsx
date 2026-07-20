@@ -115,13 +115,25 @@ export function ContactForm() {
               />
               {errors.university && <em className="contact-err">{errors.university}</em>}
             </label>
+            <label className="contact-field">
+              <span>Message</span>
+              <textarea
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Tell us how we can help…"
+                rows={5}
+                maxLength={1000}
+              />
+              {errors.message && <em className="contact-err">{errors.message}</em>}
+            </label>
             <div className="contact-actions">
               <button type="submit" className="btn-primary" disabled={submitting}>
-                <IconSend size={16} style={{ marginRight: 8, verticalAlign: "-3px" }} />
-                {submitting ? "Sending…" : "Send message"}
+                <IconSend size={16} />
+                <span>{submitting ? "Sending…" : "Send message"}</span>
               </button>
               <span className="contact-note">We reply within 48 hours.</span>
             </div>
+
           </>
         )}
       </motion.form>
