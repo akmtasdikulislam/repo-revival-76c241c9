@@ -53,12 +53,12 @@ export function SponsorShowcase() {
   const rest = SPONSORS.slice(1);
   return (
     <section className="section sponsor-showcase-section" id="sponsors">
-      <div className="sec-hdr">
-        <span className="sec-num">// powered.by.partners</span>
-        <h2 className="sec-title">
+      <div className="section-header">
+        <span className="section-eyebrow">// powered.by.partners</span>
+        <h2 className="section-title">
           Sponsors &amp; <em>partners</em>
         </h2>
-        <p className="sec-sub">Together, we make the carnival possible.</p>
+        <p className="section-subtitle">Together, we make the carnival possible.</p>
       </div>
 
       <motion.a

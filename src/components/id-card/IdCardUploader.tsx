@@ -44,17 +44,17 @@ export function IdCardUploader({ value, onChange, error, onBlur, label = "Univer
   }
 
   return (
-    <div className={`wiz-field ${error ? "err" : ""}`}>
+    <div className={`wizard-field ${error ? "err" : ""}`}>
       <span>{label}</span>
-      <div className="wiz-photo">
+      <div className="wizard-photo">
         <div
-          className="wiz-photo-thumb !h-[70px] !w-[110px] !rounded-lg"
+          className="wizard-photo-thumb !h-[70px] !w-[110px] !rounded-lg"
           style={value ? { backgroundImage: `url(${value})` } : undefined}
         >
           {!value && <IconCamera size={22} />}
         </div>
-        <div className="wiz-photo-actions">
-          <label className="wiz-photo-btn">
+        <div className="wizard-photo-actions">
+          <label className="wizard-photo-btn">
             {value ? "Replace" : "Upload ID card"}
             <input
               ref={fileRef}
@@ -67,7 +67,7 @@ export function IdCardUploader({ value, onChange, error, onBlur, label = "Univer
           {value && (
             <button
               type="button"
-              className="wiz-photo-btn secondary"
+              className="wizard-photo-btn secondary"
               onClick={() => {
                 setRawSrc(value);
                 setOpen(true);
@@ -78,10 +78,10 @@ export function IdCardUploader({ value, onChange, error, onBlur, label = "Univer
           )}
         </div>
       </div>
-      <span className="wiz-photo-hint mt-1.5 block">
+      <span className="wizard-photo-hint mt-1.5 block">
         Clear photo of your ID card · JPG/PNG · max 5 MB · min 800×500 px
       </span>
-      {error && <span className="wiz-err-msg">{error}</span>}
+      {error && <span className="wizard-err-msg">{error}</span>}
 
       {open && rawSrc && (
         <CropModal
@@ -193,19 +193,19 @@ function CropModal({
           </label>
 
           <div className="flex flex-wrap gap-2">
-            <button type="button" className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]" onClick={handleAutoCrop}>
+            <button type="button" className="wizard-btn ghost !px-3 !py-1.5 !text-[11px]" onClick={handleAutoCrop}>
               <IconWand size={14} /> Auto-crop
             </button>
             <button
               type="button"
-              className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]"
+              className="wizard-btn ghost !px-3 !py-1.5 !text-[11px]"
               onClick={() => setRotation((r) => (r + 90) % 360)}
             >
               <IconRotate size={14} /> Rotate 90°
             </button>
             <button
               type="button"
-              className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]"
+              className="wizard-btn ghost !px-3 !py-1.5 !text-[11px]"
               onClick={() => setAspect((a) => (a ? undefined : ID_ASPECT))}
             >
               <IconRefresh size={14} /> {aspect ? "Free crop" : "ID aspect"}
@@ -214,10 +214,10 @@ function CropModal({
         </div>
 
         <footer className="flex justify-end gap-2.5 border-t border-[color:var(--color-cn-strong,#1f3b6b)] p-3.5">
-          <button type="button" className="wiz-btn ghost" onClick={onCancel}>
+          <button type="button" className="wizard-btn ghost" onClick={onCancel}>
             Cancel
           </button>
-          <button type="button" className="wiz-btn primary" onClick={handleSave} disabled={busy || !croppedPixels}>
+          <button type="button" className="wizard-btn primary" onClick={handleSave} disabled={busy || !croppedPixels}>
             <IconCheck size={14} /> {busy ? "Saving…" : "Save crop"}
           </button>
         </footer>

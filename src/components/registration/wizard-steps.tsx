@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { IconCamera } from "@tabler/icons-react";
-import { IdCardUploader } from "../IdCardUploader";
+import { IdCardUploader } from "@/components/id-card/IdCardUploader";
 import {
   Field,
   PhoneInput,
@@ -9,7 +9,7 @@ import {
   YEAR_OPTIONS,
   ROLE_OPTIONS,
   TSHIRT_SIZES,
-} from "./shared";
+} from "./wizard-fields";
 import type { Member, Coach, Project, ErrFn, TouchFn, EventConfig } from "./types";
 
 /* ---------------- StepTeam ---------------- */
@@ -58,12 +58,12 @@ export function StepTeam({
       <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
         <h3 style={{ margin: 0 }}>Team details</h3>
         {isFixed && cfg.team.kind === "fixed" && (
-          <span className="wiz-badge">{cfg.team.badge}</span>
+          <span className="wizard-badge">{cfg.team.badge}</span>
         )}
       </div>
-      <p className="wiz-card-sub">{cfg.teamStepDesc(teamSize)}</p>
+      <p className="wizard-card-sub">{cfg.teamStepDesc(teamSize)}</p>
 
-      <div className="wiz-grid cols-2">
+      <div className="wizard-grid cols-2">
         <Field label="Team name" error={err("teamName")}>
           <input
             type="text"
@@ -124,11 +124,11 @@ export function StepTeam({
             flexWrap: "wrap",
           }}
         >
-          <span className="wiz-badge">Team of {teamSize}</span>
+          <span className="wizard-badge">Team of {teamSize}</span>
           <button
             type="button"
             onClick={onChangeTeamSize}
-            className="wiz-btn ghost"
+            className="wizard-btn ghost"
             style={{ padding: "6px 14px", fontSize: 10 }}
           >
             Change
@@ -159,7 +159,7 @@ function MemberCore({
 }) {
   return (
     <>
-      <div className="wiz-grid cols-2" style={{ marginBottom: 14 }}>
+      <div className="wizard-grid cols-2" style={{ marginBottom: 14 }}>
         <IdCardUploader
           value={m.idCard}
           onChange={(v) => setMember({ idCard: v })}
@@ -187,7 +187,7 @@ function MemberCore({
         </div>
       </div>
 
-      <div className="wiz-grid cols-2">
+      <div className="wizard-grid cols-2">
         <Field label="Email" error={err(p + "email")}>
           <input
             type="email"
@@ -293,15 +293,15 @@ export function StepMembers({
   return (
     <motion.div {...fadeMotion()}>
       <h3>{cfg.membersHeading(members.length)}</h3>
-      <p className="wiz-card-sub">{cfg.membersDesc(members.length)}</p>
+      <p className="wizard-card-sub">{cfg.membersDesc(members.length)}</p>
 
       {members.map((m, i) => {
         const p = `m${i}.`;
         return (
-          <div key={i} className="wiz-member-card">
-            <div className="wiz-member-head">
+          <div key={i} className="wizard-member-card">
+            <div className="wizard-member-head">
               <strong>Member {i + 1}</strong>
-              {i === 0 && <span className="wiz-badge">Team leader</span>}
+              {i === 0 && <span className="wizard-badge">Team leader</span>}
             </div>
             <MemberCore
               cfg={cfg}
@@ -359,7 +359,7 @@ export function StepSolo({
   return (
     <motion.div {...fadeMotion()}>
       <h3>Your details</h3>
-      <p className="wiz-card-sub">{cfg.soloIntro}</p>
+      <p className="wizard-card-sub">{cfg.soloIntro}</p>
 
       <div
         style={{
@@ -370,11 +370,11 @@ export function StepSolo({
           flexWrap: "wrap",
         }}
       >
-        <span className="wiz-badge">{cfg.soloBadge}</span>
+        <span className="wizard-badge">{cfg.soloBadge}</span>
         <button
           type="button"
           onClick={onChangeTeamSize}
-          className="wiz-btn ghost"
+          className="wizard-btn ghost"
           style={{ padding: "6px 14px", fontSize: 10 }}
         >
           Switch to team
@@ -406,7 +406,7 @@ export function StepSolo({
 }
 
 /* ---------------- StepCoach ---------------- */
-import { PhotoUploader } from "./shared";
+import { PhotoUploader } from "./wizard-fields";
 
 export function StepCoach({
   coach,
@@ -422,12 +422,12 @@ export function StepCoach({
   return (
     <motion.div {...fadeMotion()}>
       <h3>Team coach</h3>
-      <p className="wiz-card-sub">
+      <p className="wizard-card-sub">
         Faculty or mentor accompanying the team on contest day.
       </p>
 
-      <div className="wiz-member-card">
-        <div className="wiz-grid cols-2" style={{ marginBottom: 14 }}>
+      <div className="wizard-member-card">
+        <div className="wizard-grid cols-2" style={{ marginBottom: 14 }}>
           <PhotoUploader
             value={coach.photo}
             onChange={(v) => setCoach({ photo: v })}
@@ -443,7 +443,7 @@ export function StepCoach({
             />
           </Field>
         </div>
-        <div className="wiz-grid cols-2">
+        <div className="wizard-grid cols-2">
           <Field label="Designation" error={err("c.designation")}>
             <input
               type="text"
@@ -505,13 +505,13 @@ export function StepProject({
   return (
     <motion.div {...fadeMotion()}>
       <h3>Project idea</h3>
-      <p className="wiz-card-sub">
+      <p className="wizard-card-sub">
         A rough direction is fine — you can iterate during the 24 hours. Judges use
         this to route mentors your way.
       </p>
 
-      <div className="wiz-member-card">
-        <div className="wiz-grid" style={{ marginBottom: 14 }}>
+      <div className="wizard-member-card">
+        <div className="wizard-grid" style={{ marginBottom: 14 }}>
           <Field label="Working title" error={err("p.title")}>
             <input
               type="text"
@@ -522,7 +522,7 @@ export function StepProject({
             />
           </Field>
         </div>
-        <div className="wiz-grid" style={{ marginBottom: 14 }}>
+        <div className="wizard-grid" style={{ marginBottom: 14 }}>
           <Field label="One-paragraph pitch" error={err("p.pitch")}>
             <textarea
               rows={4}
@@ -533,7 +533,7 @@ export function StepProject({
             />
           </Field>
         </div>
-        <div className="wiz-grid" style={{ marginBottom: 14 }}>
+        <div className="wizard-grid" style={{ marginBottom: 14 }}>
           <Field label="Problem statement" error={err("p.problem")}>
             <textarea
               rows={3}
@@ -544,7 +544,7 @@ export function StepProject({
             />
           </Field>
         </div>
-        <div className="wiz-grid">
+        <div className="wizard-grid">
           <Field label="Tech stack" error={err("p.stack")}>
             <input
               type="text"
@@ -599,14 +599,14 @@ export function StepReview({
   return (
     <motion.div {...fadeMotion()}>
       <h3>Review &amp; confirm</h3>
-      <p className="wiz-card-sub">
+      <p className="wizard-card-sub">
         Double-check everything before you head to payment.
       </p>
 
       {!isSolo && (
-        <div className="wiz-review-block">
+        <div className="wizard-review-block">
           <h5>// team</h5>
-          <dl className="wiz-review-grid">
+          <dl className="wizard-review-grid">
             <dt>Team name</dt><dd>{teamName || "—"}</dd>
             <dt>Institution</dt><dd>{institution || "—"}</dd>
             <dt>Leader name</dt><dd>{leaderName || "—"}</dd>
@@ -617,14 +617,14 @@ export function StepReview({
       )}
 
       {members.map((m, i) => (
-        <div key={i} className="wiz-review-block">
+        <div key={i} className="wizard-review-block">
           <h5>
             // member {i + 1}
             {i === 0 ? " · leader" : ""}
           </h5>
-          <div className="wiz-review-photo-row">
+          <div className="wizard-review-photo-row">
             <div
-              className="wiz-review-photo"
+              className="wizard-review-photo"
               style={{
                 width: 140,
                 height: 88,
@@ -637,7 +637,7 @@ export function StepReview({
             >
               {!m.idCard && <IconCamera size={20} />}
             </div>
-            <dl className="wiz-review-grid" style={{ flex: 1 }}>
+            <dl className="wizard-review-grid" style={{ flex: 1 }}>
               <dt>Full name</dt><dd>{m.fullName || "—"}</dd>
               <dt>ID number</dt><dd>{m.idNumber || "—"}</dd>
               <dt>Email</dt><dd>{m.email || "—"}</dd>
@@ -658,17 +658,17 @@ export function StepReview({
       ))}
 
       {coach && (
-        <div className="wiz-review-block">
+        <div className="wizard-review-block">
           <h5>// coach</h5>
-          <div className="wiz-review-photo-row">
+          <div className="wizard-review-photo-row">
             <div
-              className="wiz-review-photo"
+              className="wizard-review-photo"
               style={coach.photo ? { backgroundImage: `url(${coach.photo})` } : undefined}
               aria-label="coach photo"
             >
               {!coach.photo && <IconCamera size={20} />}
             </div>
-            <dl className="wiz-review-grid" style={{ flex: 1 }}>
+            <dl className="wizard-review-grid" style={{ flex: 1 }}>
               <dt>Full name</dt><dd>{coach.fullName || "—"}</dd>
               <dt>Designation</dt><dd>{coach.designation || "—"}</dd>
               <dt>Institution</dt><dd>{coach.institution || "—"}</dd>
@@ -680,9 +680,9 @@ export function StepReview({
       )}
 
       {project && (
-        <div className="wiz-review-block">
+        <div className="wizard-review-block">
           <h5>// project</h5>
-          <dl className="wiz-review-grid">
+          <dl className="wizard-review-grid">
             <dt>Title</dt><dd>{project.title || "—"}</dd>
             <dt>Pitch</dt><dd>{project.pitch || "—"}</dd>
             <dt>Problem</dt><dd>{project.problem || "—"}</dd>
@@ -691,8 +691,8 @@ export function StepReview({
         </div>
       )}
 
-      <div className="wiz-agreements">
-        <label className="wiz-agree">
+      <div className="wizard-agreements">
+        <label className="wizard-agree">
           <input
             type="checkbox"
             checked={agreeRules}
@@ -700,7 +700,7 @@ export function StepReview({
           />
           <span dangerouslySetInnerHTML={{ __html: cfg.rulesAgree }} />
         </label>
-        <label className="wiz-agree">
+        <label className="wizard-agree">
           <input
             type="checkbox"
             checked={agreeInfo}
@@ -711,7 +711,7 @@ export function StepReview({
             <strong> disqualification</strong> without refund.
           </span>
         </label>
-        <label className="wiz-agree">
+        <label className="wizard-agree">
           <input
             type="checkbox"
             checked={agreeMedia}
@@ -744,11 +744,11 @@ export function StepPayment({
   return (
     <motion.div {...fadeMotion()}>
       <h3>Payment</h3>
-      <p className="wiz-card-sub">
+      <p className="wizard-card-sub">
         Choose a payment method. Registration is confirmed once payment succeeds.
       </p>
 
-      <div className="wiz-pay-methods" role="radiogroup" aria-label="Payment method">
+      <div className="wizard-pay-methods" role="radiogroup" aria-label="Payment method">
         {(
           [
             { id: "bkash", name: "bKash", hint: "Mobile wallet" },
@@ -761,7 +761,7 @@ export function StepPayment({
             type="button"
             role="radio"
             aria-checked={payMethod === m.id}
-            className={`wiz-pay-method ${payMethod === m.id ? "active" : ""}`}
+            className={`wizard-pay-method ${payMethod === m.id ? "active" : ""}`}
             onClick={() => setPayMethod(m.id)}
           >
             <strong>{m.name}</strong>
@@ -770,9 +770,9 @@ export function StepPayment({
         ))}
       </div>
 
-      <div className="wiz-review-block" style={{ marginTop: 20 }}>
+      <div className="wizard-review-block" style={{ marginTop: 20 }}>
         <h5>// summary</h5>
-        <dl className="wiz-review-grid">
+        <dl className="wizard-review-grid">
           <dt>Registration fee</dt><dd>৳{fee}</dd>
           <dt>Method</dt>
           <dd style={{ textTransform: "capitalize" }}>{payMethod}</dd>
@@ -781,10 +781,10 @@ export function StepPayment({
         </dl>
       </div>
 
-      <p className="wiz-card-sub" style={{ marginTop: 16, marginBottom: 0 }}>
+      <p className="wizard-card-sub" style={{ marginTop: 16, marginBottom: 0 }}>
         No card data ever touches our servers — payment happens on the gateway.
       </p>
-      {submitting && <p className="wiz-card-sub">Processing your payment…</p>}
+      {submitting && <p className="wizard-card-sub">Processing your payment…</p>}
       <div style={{ display: "none" }}>{onPay.toString().length}</div>
     </motion.div>
   );

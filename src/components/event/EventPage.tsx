@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
-import { CountdownBar } from "@/components/carnival/CountdownBar";
+import { SiteLayout } from "@/components/layout/SiteLayout";
+import { CountdownBar } from "@/components/event/EventCountdownBar";
 
 /**
  * Shared shell for /iupc, /ctf, /hackathon.
@@ -24,8 +24,8 @@ export type EventHero = {
 
 export function EventPage({ hero, children }: { hero: EventHero; children: ReactNode }) {
   const heroStyle = {
-    ["--ev-bg" as string]: hero.background,
-    ["--ev-fg" as string]: hero.foreground,
+    ["--event-bg" as string]: hero.background,
+    ["--event-fg" as string]: hero.foreground,
   } as CSSProperties;
 
   const heroClass = `event-hero${hero.extraHeroClass ? " " + hero.extraHeroClass : ""}`;
@@ -34,15 +34,15 @@ export function EventPage({ hero, children }: { hero: EventHero; children: React
     <SiteLayout>
       <section className={heroClass} style={heroStyle}>
         <div className="event-hero-inner">
-          {hero.tag && <span className="tc-status">{hero.tag}</span>}
+          {hero.tag && <span className="event-status">{hero.tag}</span>}
           <h1 className="event-title">{hero.title}</h1>
           <p className="event-sub">{hero.sub}</p>
           <p className="event-desc">{hero.desc}</p>
           <div className="event-meta">
             {hero.meta.map((m, i) => (
               <div key={i}>
-                <span className="em-num">{m.num}</span>
-                <span className="em-label">{m.label}</span>
+                <span className="event-meta-number">{m.num}</span>
+                <span className="event-meta-label">{m.label}</span>
               </div>
             ))}
           </div>

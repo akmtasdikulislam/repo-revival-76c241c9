@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EventPage } from "@/components/carnival/EventPage";
-import { Wizard } from "@/components/carnival/registration/WizardShell";
-import { iupcConfig } from "@/components/carnival/registration/events/iupc.config";
+import { EventPage } from "@/components/event/EventPage";
+import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
+import { iupcConfig } from "@/components/registration/events/iupc.config";
 import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/iupc")({
@@ -34,9 +34,9 @@ function IUPC() {
       }}
     >
       <section className="section">
-        <div className="sec-hdr">
-          <span className="sec-num">// rules.md</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// rules.md</span>
+          <h2 className="section-title">
             What to <em>expect</em>
           </h2>
         </div>
@@ -49,14 +49,14 @@ function IUPC() {
       </section>
 
       <section className="section alt" id="register-section">
-        <div className="sec-hdr">
-          <span className="sec-num">// register --event=iupc</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// register --event=iupc</span>
+          <h2 className="section-title">
             Register your <em>team</em>
           </h2>
-          <p className="sec-sub">All 3 members are required for IUPC.</p>
+          <p className="section-subtitle">All 3 members are required for IUPC.</p>
         </div>
-        <Wizard cfg={iupcConfig} />
+        <RegistrationWizard cfg={iupcConfig} />
       </section>
     </EventPage>
   );

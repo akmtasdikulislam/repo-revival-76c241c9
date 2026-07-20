@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SiteLayout } from "@/components/carnival/SiteLayout";
+import { SiteLayout } from "@/components/layout/SiteLayout";
 import { GALLERY_IMAGES, type GalleryImage } from "@/data/gallery";
 import { buildMeta } from "@/lib/seo";
 
@@ -40,12 +40,12 @@ function Gallery() {
   return (
     <SiteLayout>
       <section className="section" style={{ paddingTop: 150 }}>
-        <div className="sec-hdr">
-          <span className="sec-num">// gallery --all</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// gallery --all</span>
+          <h2 className="section-title">
             From the <em>archives</em>
           </h2>
-          <p className="sec-sub">Moments from past events.</p>
+          <p className="section-subtitle">Moments from past events.</p>
         </div>
         <div id="galleryGrid" className="simple-gallery-grid">
           {IMAGES.map((img, i) => (

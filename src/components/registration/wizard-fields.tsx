@@ -49,10 +49,10 @@ export function Field({
   children: ReactNode;
 }) {
   return (
-    <label className={`wiz-field ${error ? "err" : ""}`}>
+    <label className={`wizard-field ${error ? "err" : ""}`}>
       <span>{label}</span>
       {children}
-      {error && <span className="wiz-err-msg">{error}</span>}
+      {error && <span className="wizard-err-msg">{error}</span>}
     </label>
   );
 }
@@ -72,8 +72,8 @@ export function PhoneInput({
 }) {
   return (
     <Field label={label} error={error}>
-      <span className="wiz-phone">
-        <span className="wiz-phone-prefix">+880</span>
+      <span className="wizard-phone">
+        <span className="wizard-phone-prefix">+880</span>
         <input
           type="tel"
           placeholder="1XXXXXXXXX"
@@ -111,26 +111,26 @@ export function PhotoUploader({
     reader.readAsDataURL(file);
   }
   return (
-    <div className={`wiz-field ${error ? "err" : ""}`}>
+    <div className={`wizard-field ${error ? "err" : ""}`}>
       <span>Photo</span>
-      <div className="wiz-photo">
+      <div className="wizard-photo">
         <div
-          className="wiz-photo-thumb"
+          className="wizard-photo-thumb"
           style={value ? { backgroundImage: `url(${value})` } : undefined}
         >
           {!value && <IconCamera size={22} />}
         </div>
-        <div className="wiz-photo-actions">
-          <label className="wiz-photo-btn">
+        <div className="wizard-photo-actions">
+          <label className="wizard-photo-btn">
             {value ? "Change" : "Upload"}
             <input type="file" accept="image/*" onChange={handleFile} onBlur={onBlur} />
           </label>
-          <span className="wiz-photo-hint">
+          <span className="wizard-photo-hint">
             JPG / PNG · square · max 2 MB · min 400×400 px
           </span>
         </div>
       </div>
-      {error && <span className="wiz-err-msg">{error}</span>}
+      {error && <span className="wizard-err-msg">{error}</span>}
     </div>
   );
 }
@@ -157,7 +157,7 @@ export function InstitutionField({
   const errMsg = err(errorKey);
   return (
     <div
-      className={`wiz-field ${errMsg ? "err" : ""}`}
+      className={`wizard-field ${errMsg ? "err" : ""}`}
       style={{ position: "relative" }}
     >
       <span>University / Institution</span>
@@ -214,7 +214,7 @@ export function InstitutionField({
           ))}
         </div>
       )}
-      {errMsg && <span className="wiz-err-msg">{errMsg}</span>}
+      {errMsg && <span className="wizard-err-msg">{errMsg}</span>}
     </div>
   );
 }
@@ -229,9 +229,9 @@ export function StepBar({
   const total = flow.length;
   const progress = total > 1 ? (stepIndex / (total - 1)) * 100 : 0;
   return (
-    <div className="wiz-stepbar" role="list" aria-label="Registration steps">
-      <div className="wiz-stepbar-track" aria-hidden>
-        <div className="wiz-stepbar-fill" style={{ width: `${progress}%` }} />
+    <div className="wizard-stepbar" role="list" aria-label="Registration steps">
+      <div className="wizard-stepbar-track" aria-hidden>
+        <div className="wizard-stepbar-fill" style={{ width: `${progress}%` }} />
       </div>
       {flow.map((id, idx) => {
         const meta = STEP_META[id];
@@ -239,18 +239,18 @@ export function StepBar({
         return (
           <div
             key={id}
-            className={`wiz-step ${state}`}
+            className={`wizard-step ${state}`}
             role="listitem"
             aria-current={stepIndex === idx ? "step" : undefined}
           >
-            <span className="wiz-step-node">
+            <span className="wizard-step-node">
               {stepIndex > idx ? (
                 <IconCheck size={14} strokeWidth={3} />
               ) : (
                 <meta.Icon size={14} />
               )}
             </span>
-            <span className="wiz-step-label">{meta.label}</span>
+            <span className="wizard-step-label">{meta.label}</span>
           </div>
         );
       })}
@@ -272,19 +272,19 @@ export function FeeBanner({
   soloLabel: string;
 }) {
   return (
-    <div className="wiz-fee-banner" role="note">
-      <span className="wiz-fee-banner-icon" aria-hidden>
+    <div className="wizard-fee-banner" role="note">
+      <span className="wizard-fee-banner-icon" aria-hidden>
         <IconReceipt2 size={18} />
       </span>
-      <div className="wiz-fee-banner-body">
-        <span className="wiz-fee-banner-label">Registration fee</span>
-        <span className="wiz-fee-banner-value">
+      <div className="wizard-fee-banner-body">
+        <span className="wizard-fee-banner-label">Registration fee</span>
+        <span className="wizard-fee-banner-value">
           ৳{feePerPerson} <em>/person</em> ·{" "}
           {isSolo ? soloLabel : `Team of ${teamSize}`} ·{" "}
           <strong>৳{total} total</strong>
         </span>
       </div>
-      <span className="wiz-fee-banner-hint">Paid at checkout</span>
+      <span className="wizard-fee-banner-hint">Paid at checkout</span>
     </div>
   );
 }
@@ -301,15 +301,15 @@ export function SuccessPanel({
   hint: string;
 }) {
   return (
-    <motion.div {...fadeMotion()} className="wiz-success">
-      <div className="wiz-tick">✓</div>
+    <motion.div {...fadeMotion()} className="wizard-success">
+      <div className="wizard-tick">✓</div>
       <h3>Team registered</h3>
       <p>
         Payment received.{" "}
         <strong style={{ color: "var(--color-cn-ink)" }}>{teamName}</strong> is officially
         in the {subject}.
       </p>
-      <div className="wiz-team-code">{code}</div>
+      <div className="wizard-team-code">{code}</div>
       <p>Save this team code — you'll need it for {hint}.</p>
     </motion.div>
   );
@@ -332,12 +332,12 @@ export function SizeChart({
 }) {
   const spec = SIZE_SPECS[size] ?? SIZE_SPECS.M;
   return (
-    <div className="wiz-size-chart">
-      <div className="wiz-size-head">
+    <div className="wizard-size-chart">
+      <div className="wizard-size-head">
         <span>// size chart</span>
-        <span className="wiz-size-tag">UNISEX · FLAT</span>
+        <span className="wizard-size-tag">UNISEX · FLAT</span>
       </div>
-      <div className="wiz-size-preview" aria-hidden>
+      <div className="wizard-size-preview" aria-hidden>
         <svg viewBox="0 0 220 180" width="100%" height="150" fill="none">
           <path
             d="M70 22 L52 34 L22 52 L34 76 L58 64 L58 158 L162 158 L162 64 L186 76 L198 52 L168 34 L150 22 C144 36 132 44 110 44 C88 44 76 36 70 22 Z"
@@ -404,7 +404,7 @@ export function SizeChart({
         </svg>
       </div>
       <div
-        className="wiz-size-pills"
+        className="wizard-size-pills"
         role="radiogroup"
         aria-label="Preview t-shirt size"
       >
@@ -414,14 +414,14 @@ export function SizeChart({
             type="button"
             role="radio"
             aria-checked={size === s}
-            className={`wiz-size-pill ${size === s ? "active" : ""}`}
+            className={`wizard-size-pill ${size === s ? "active" : ""}`}
             onClick={() => onSize(s)}
           >
             {s}
           </button>
         ))}
       </div>
-      <div className="wiz-size-specs">
+      <div className="wizard-size-specs">
         <div>
           <span>Chest</span>
           <strong>{spec.chest}</strong>
@@ -431,7 +431,7 @@ export function SizeChart({
           <strong>{spec.length}</strong>
         </div>
       </div>
-      <p className="wiz-size-hint">
+      <p className="wizard-size-hint">
         Tap a size to preview. Between two? Pick the larger for a relaxed fit. 180
         GSM combed cotton.
       </p>
@@ -444,22 +444,22 @@ export type SummaryAsideRow = { label: string; value: string };
 export function SummaryAside({ rows, fee }: { rows: SummaryAsideRow[]; fee: number }) {
   const [previewSize, setPreviewSize] = useState<string>("M");
   return (
-    <div className="wiz-aside-col">
-      <aside className="wiz-aside">
+    <div className="wizard-aside-col">
+      <aside className="wizard-aside">
         <h4>// order summary</h4>
         {rows.map((r) => (
-          <div key={r.label} className="wiz-aside-row">
+          <div key={r.label} className="wizard-aside-row">
             <span>{r.label}</span>
             <span style={{ textAlign: "right", maxWidth: 180 }}>{r.value}</span>
           </div>
         ))}
-        <div className="wiz-aside-total">
+        <div className="wizard-aside-total">
           <span>Total</span>
           <strong>৳{fee}</strong>
         </div>
       </aside>
 
-      <aside className="wiz-aside wiz-aside-size">
+      <aside className="wizard-aside wizard-aside-size">
         <SizeChart size={previewSize} onSize={setPreviewSize} />
       </aside>
     </div>
@@ -484,11 +484,11 @@ export function TeamSizeChooser({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="wiz-card"
+      className="wizard-card"
       style={{ maxWidth: 780, margin: "0 auto" }}
     >
       <h3>{heading}</h3>
-      <p className="wiz-card-sub">{sub}</p>
+      <p className="wizard-card-sub">{sub}</p>
       <div
         style={{
           display: "grid",
@@ -502,10 +502,10 @@ export function TeamSizeChooser({
             key={o.n}
             type="button"
             onClick={() => onPick(o.n)}
-            className="wiz-pay-method"
+            className="wizard-pay-method"
             style={{ alignItems: "flex-start" }}
           >
-            <span className="wiz-badge" style={{ marginBottom: 8 }}>
+            <span className="wizard-badge" style={{ marginBottom: 8 }}>
               {o.tag}
             </span>
             <strong style={{ fontSize: 16 }}>{o.title}</strong>
@@ -525,7 +525,7 @@ export function TeamSizeChooser({
         ))}
       </div>
       <p
-        className="wiz-card-sub"
+        className="wizard-card-sub"
         style={{ marginTop: 18, marginBottom: 0, fontSize: 12 }}
       >
         Registration fee is ৳{feePerPerson} per person, paid at checkout.

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { EventPage } from "@/components/carnival/EventPage";
-import { Wizard } from "@/components/carnival/registration/WizardShell";
-import { hackathonConfig } from "@/components/carnival/registration/events/hackathon.config";
+import { EventPage } from "@/components/event/EventPage";
+import { RegistrationWizard } from "@/components/registration/RegistrationWizard";
+import { hackathonConfig } from "@/components/registration/events/hackathon.config";
 import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/hackathon")({
@@ -35,9 +35,9 @@ function Hackathon() {
       }}
     >
       <section className="section">
-        <div className="sec-hdr">
-          <span className="sec-num">// rules.md</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// rules.md</span>
+          <h2 className="section-title">
             What to <em>expect</em>
           </h2>
         </div>
@@ -50,14 +50,14 @@ function Hackathon() {
       </section>
 
       <section className="section alt" id="register-section">
-        <div className="sec-hdr">
-          <span className="sec-num">// register --event=hackathon</span>
-          <h2 className="sec-title">
+        <div className="section-header">
+          <span className="section-eyebrow">// register --event=hackathon</span>
+          <h2 className="section-title">
             Register your <em>team</em>
           </h2>
-          <p className="sec-sub">At least 1 member required — add up to 4.</p>
+          <p className="section-subtitle">At least 1 member required — add up to 4.</p>
         </div>
-        <Wizard cfg={hackathonConfig} />
+        <RegistrationWizard cfg={hackathonConfig} />
       </section>
     </EventPage>
   );
