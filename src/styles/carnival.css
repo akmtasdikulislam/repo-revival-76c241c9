@@ -2548,11 +2548,6 @@ em {
   margin-top: 0;
 }
 
-/* IUPC returns to the original full-hero canvas and original scale. */
-.iupc-animation-shell {
-  display: contents;
-}
-
 
 /* Status lookup: cleaner spacing and a smooth custom select shell. */
 .status-layout {
