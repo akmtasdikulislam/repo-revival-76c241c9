@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/carnival/SiteLayout";
 import { GALLERY_IMAGES, type GalleryImage } from "@/data/gallery";
+import { buildMeta } from "@/lib/seo";
+
 
 // Repeat the curated images to build a rich media wall.
 const IMAGES: GalleryImage[] = Array.from({ length: 3 })
