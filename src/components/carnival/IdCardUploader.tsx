@@ -46,13 +46,8 @@ export function IdCardUploader({ value, onChange, error, onBlur, label = "Univer
       <span>{label}</span>
       <div className="wiz-photo">
         <div
-          className="wiz-photo-thumb"
-          style={{
-            width: 110,
-            height: 70,
-            borderRadius: 8,
-            ...(value ? { backgroundImage: `url(${value})` } : {}),
-          }}
+          className="wiz-photo-thumb !h-[70px] !w-[110px] !rounded-lg"
+          style={value ? { backgroundImage: `url(${value})` } : undefined}
         >
           {!value && <IconCamera size={22} />}
         </div>
@@ -78,12 +73,10 @@ export function IdCardUploader({ value, onChange, error, onBlur, label = "Univer
             >
               <IconRefresh size={12} /> Re-crop
             </button>
-
           )}
-
         </div>
       </div>
-      <span className="wiz-photo-hint" style={{ marginTop: 6, display: "block" }}>
+      <span className="wiz-photo-hint mt-1.5 block">
         Clear photo of your ID card · JPG/PNG · max 5 MB · min 800×500 px
       </span>
       {error && <span className="wiz-err-msg">{error}</span>}
@@ -129,7 +122,6 @@ function CropModal({
   }, [onCancel]);
 
   async function handleAutoCrop() {
-    // Auto-crop: reset to center, apply ID-card aspect, fit zoom.
     setAspect(ID_ASPECT);
     setRotation(0);
     setCrop({ x: 0, y: 0 });
@@ -152,60 +144,25 @@ function CropModal({
       role="dialog"
       aria-modal="true"
       aria-label="Crop ID card"
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(3,10,25,0.78)",
-        zIndex: 1000,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 16,
-        backdropFilter: "blur(6px)",
-      }}
+      className="fixed inset-0 z-[1000] flex items-center justify-center p-4 backdrop-blur-md bg-[rgba(3,10,25,0.78)]"
       onClick={(e) => e.target === e.currentTarget && onCancel()}
     >
-      <div
-        style={{
-          width: "min(760px, 100%)",
-          background: "var(--surface-1, #0b1428)",
-          border: "1px solid var(--border-strong, #1f3b6b)",
-          borderRadius: 16,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "14px 18px",
-            borderBottom: "1px solid var(--border-strong, #1f3b6b)",
-          }}
-        >
-          <strong style={{ fontFamily: "var(--fm)", color: "var(--text, #cde3ff)", fontSize: 13, letterSpacing: 0.5 }}>
+      <div className="flex w-[min(760px,100%)] flex-col overflow-hidden rounded-2xl border border-[color:var(--border-strong,#1f3b6b)] bg-[color:var(--surface-1,#0b1428)]">
+        <header className="flex items-center justify-between border-b border-[color:var(--border-strong,#1f3b6b)] px-[18px] py-[14px]">
+          <strong className="font-mono text-[13px] tracking-wider text-[color:var(--text,#cde3ff)]">
             // crop your university id card
           </strong>
           <button
             type="button"
             onClick={onCancel}
             aria-label="Close"
-            style={{
-              background: "transparent",
-              border: 0,
-              color: "var(--muted, #6f89b6)",
-              cursor: "pointer",
-              display: "flex",
-              padding: 4,
-            }}
+            className="flex cursor-pointer border-0 bg-transparent p-1 text-[color:var(--muted,#6f89b6)]"
           >
             <IconX size={18} />
           </button>
         </header>
 
-        <div style={{ position: "relative", height: 380, background: "#04091a" }}>
+        <div className="relative h-[380px] bg-[#04091a]">
           <Cropper
             image={src}
             crop={crop}
@@ -220,19 +177,9 @@ function CropModal({
           />
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gap: 14,
-            padding: 16,
-            borderTop: "1px solid var(--border-strong, #1f3b6b)",
-            fontFamily: "var(--fm)",
-            fontSize: 12,
-            color: "var(--text, #cde3ff)",
-          }}
-        >
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ color: "var(--muted, #6f89b6)" }}>Zoom</span>
+        <div className="grid gap-3.5 border-t border-[color:var(--border-strong,#1f3b6b)] p-4 font-mono text-xs text-[color:var(--text,#cde3ff)]">
+          <label className="grid gap-1.5">
+            <span className="text-[color:var(--muted,#6f89b6)]">Zoom</span>
             <input
               type="range"
               min={1}
@@ -243,38 +190,28 @@ function CropModal({
             />
           </label>
 
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <button type="button" className="wiz-btn ghost" onClick={handleAutoCrop} style={btnSm}>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]" onClick={handleAutoCrop}>
               <IconWand size={14} /> Auto-crop
             </button>
             <button
               type="button"
-              className="wiz-btn ghost"
+              className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]"
               onClick={() => setRotation((r) => (r + 90) % 360)}
-              style={btnSm}
             >
               <IconRotate size={14} /> Rotate 90°
             </button>
             <button
               type="button"
-              className="wiz-btn ghost"
+              className="wiz-btn ghost !px-3 !py-1.5 !text-[11px]"
               onClick={() => setAspect((a) => (a ? undefined : ID_ASPECT))}
-              style={btnSm}
             >
               <IconRefresh size={14} /> {aspect ? "Free crop" : "ID aspect"}
             </button>
           </div>
         </div>
 
-        <footer
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: 10,
-            padding: 14,
-            borderTop: "1px solid var(--border-strong, #1f3b6b)",
-          }}
-        >
+        <footer className="flex justify-end gap-2.5 border-t border-[color:var(--border-strong,#1f3b6b)] p-3.5">
           <button type="button" className="wiz-btn ghost" onClick={onCancel}>
             Cancel
           </button>
@@ -287,19 +224,15 @@ function CropModal({
   );
 }
 
-const btnSm = { padding: "6px 12px", fontSize: 11 } as const;
-
 async function getCroppedImg(src: string, pixels: Area, rotation: number): Promise<string> {
   const image = await loadImage(src);
   const rad = (rotation * Math.PI) / 180;
   const sin = Math.abs(Math.sin(rad));
   const cos = Math.abs(Math.cos(rad));
 
-  // Bounding box of rotated image
   const bBoxWidth = image.width * cos + image.height * sin;
   const bBoxHeight = image.width * sin + image.height * cos;
 
-  // Rotate onto a canvas exactly the size of the bounding box
   const rot = document.createElement("canvas");
   rot.width = bBoxWidth;
   rot.height = bBoxHeight;
@@ -308,7 +241,6 @@ async function getCroppedImg(src: string, pixels: Area, rotation: number): Promi
   rctx.rotate(rad);
   rctx.drawImage(image, -image.width / 2, -image.height / 2);
 
-  // Crop from the rotated canvas at pixels.{x,y,width,height}
   const canvas = document.createElement("canvas");
   canvas.width = pixels.width;
   canvas.height = pixels.height;
