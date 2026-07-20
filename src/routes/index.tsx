@@ -141,6 +141,14 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-key">for</span> (i = <span className="tk-num">0</span>; i {"<"} n; i++) {"{"}
+{"  "}dp[i] = <span className="tk-fn">max</span>(dp[i-<span className="tk-num">1</span>], dp[i-<span className="tk-num">2</span>] + a[i]);
+{"}"}
+<span className="tk-cmt">{"// Accepted · 0.04s"}</span>
+              </pre>
+            </div>
           </div>
         </Reveal>
 
@@ -172,6 +180,14 @@ function Home() {
                 Explore &amp; register →
               </Link>
             </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-var">$</span> <span className="tk-fn">nc</span> <span className="tk-str">chall.bupctf.io</span> <span className="tk-num">1337</span>
+<span className="tk-str">Welcome, agent. Find the flag.</span>
+<span className="tk-fn">strings</span> <span className="tk-str">binary</span> | <span className="tk-fn">grep</span> <span className="tk-str">flag{"{"}</span>
+<span className="tk-num">flag{"{n0t_th3_r34l_0ne}"}</span>
+              </pre>
+            </div>
           </div>
         </Reveal>
 
@@ -198,6 +214,13 @@ function Home() {
               <Link to="/hackathon" className="track-link">
                 Explore &amp; register →
               </Link>
+            </div>
+            <div className="track-code" aria-hidden="true">
+              <pre>
+<span className="tk-key">const</span> idea = <span className="tk-fn">prototype</span>(vision);
+<span className="tk-fn">deploy</span>(idea);
+<span className="tk-cmt">{'// git commit -m "ship it"'}</span>
+              </pre>
             </div>
           </div>
         </Reveal>
