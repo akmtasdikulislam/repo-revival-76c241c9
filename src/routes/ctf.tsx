@@ -19,8 +19,8 @@ function CTF() {
   return (
     <EventPage
       hero={{
-        background: "linear-gradient(135deg,#e9ad00 0%,#f7cb38 48%,#d99b00 100%)",
-        foreground: "#06183d",
+        background: "linear-gradient(135deg,#061712 0%,#0d2a22 48%,#0a1f1a 100%)",
+        foreground: "#e6fff3",
         extraHeroClass: "ctf-hero",
         tag: "Registration Opens Soon",
         title: "CTF Championship",

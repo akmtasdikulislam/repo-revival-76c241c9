@@ -331,6 +331,11 @@
   max-width: 100%;
 }
 .code-block.dark { background: rgb(3 8 22 / .7); }
+.code-block.terminal {
+  background: rgb(6 20 16 / .78);
+  border-color: rgb(47 230 166 / .3);
+  box-shadow: inset 0 0 0 1px rgb(47 230 166 / .08), 0 0 20px rgb(47 230 166 / .12);
+}
 .c-kw { color: var(--color-cn-coral); }
 .c-var { color: inherit; opacity: .92; }
 .c-num { color: var(--color-cn-gold); }

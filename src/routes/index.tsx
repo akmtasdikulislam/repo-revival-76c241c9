@@ -154,7 +154,7 @@ function Home() {
         <Reveal delay={0.1}>
           <div
             className="track-card"
-            style={{ ["--countdown-bg" as any]: "#f2b705", ["--countdown-fg" as any]: "#092763" }}
+            style={{ ["--countdown-bg" as any]: "#0a1f1a", ["--countdown-fg" as any]: "#e6fff3" }}
           >
             <div className="track-info">
               <div className="track-tag">
@@ -180,7 +180,7 @@ function Home() {
               </Link>
             </div>
             <div className="track-visual">
-              <pre className="code-block dark"><span className="c-cm">$</span> nc chall.bupctf.io 1337
+              <pre className="code-block dark terminal"><span className="c-cm">$</span> nc chall.bupctf.io 1337
 <span className="c-str">Welcome, agent. Find the flag.</span>
 <span className="c-fn">strings</span> binary | <span className="c-fn">grep</span> <span className="c-str">flag{"{"}</span>
 <span className="c-flag">flag{"{n0t_th3_r34l_0ne}"}</span></pre>
