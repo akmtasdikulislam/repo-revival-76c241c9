@@ -40,6 +40,15 @@
   --color-cn-coral: #ff6f6f;
   --color-cn-pink: #ff5fa8;
 
+  /* Cyber red palette — CTF track */
+  --color-cn-cyber-red: #e63946;
+  --color-cn-cyber-red-bright: #ff4d6d;
+  --color-cn-cyber-red-dim: #b32633;
+  --color-cn-cyber-red-bg: #0f0505;
+  --color-cn-cyber-red-surface: #1a0809;
+  --color-cn-cyber-red-ink: #fff0f3;
+  --shadow-glow-red: 0 0 24px rgb(230 57 70 / 0.35);
+
   /* Type */
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-display: "Bebas Neue", system-ui, sans-serif;
