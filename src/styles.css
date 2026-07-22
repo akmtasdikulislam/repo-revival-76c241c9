@@ -40,6 +40,15 @@
   --color-cn-coral: #ff6f6f;
   --color-cn-pink: #ff5fa8;
 
+  /* Cyber red palette — CTF track */
+  --color-cn-cyber-red: #e63946;
+  --color-cn-cyber-red-bright: #ff4d6d;
+  --color-cn-cyber-red-dim: #b32633;
+  --color-cn-cyber-red-bg: #0f0505;
+  --color-cn-cyber-red-surface: #1a0809;
+  --color-cn-cyber-red-ink: #fff0f3;
+  --shadow-glow-red: 0 0 24px rgb(230 57 70 / 0.35);
+
   /* Type */
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-display: "Bebas Neue", system-ui, sans-serif;
@@ -336,6 +345,18 @@
   border-color: rgb(47 230 166 / .3);
   box-shadow: inset 0 0 0 1px rgb(47 230 166 / .08), 0 0 20px rgb(47 230 166 / .12);
 }
+.code-block.cyber-red {
+  background: var(--color-cn-cyber-red-surface);
+  border-color: rgb(230 57 70 / .35);
+  box-shadow: inset 0 0 0 1px rgb(255 77 109 / .08), 0 0 20px rgb(230 57 70 / .14);
+}
+.code-block.cyber-red .c-kw { color: var(--color-cn-cyber-red-bright); }
+.code-block.cyber-red .c-var { color: var(--color-cn-cyber-red-ink); opacity: .92; }
+.code-block.cyber-red .c-num { color: var(--color-cn-cyber-red); }
+.code-block.cyber-red .c-fn { color: var(--color-cn-cyber-red-bright); }
+.code-block.cyber-red .c-cm { color: var(--color-cn-cyber-red-dim); opacity: .85; }
+.code-block.cyber-red .c-str { color: var(--color-cn-cyber-red-bright); }
+.code-block.cyber-red .c-flag { color: var(--color-cn-cyber-red); font-weight: 700; }
 .c-kw { color: var(--color-cn-coral); }
 .c-var { color: inherit; opacity: .92; }
 .c-num { color: var(--color-cn-gold); }
